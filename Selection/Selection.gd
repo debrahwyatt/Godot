@@ -30,8 +30,8 @@ func _input(event):
 		selection_end = event.position - selection_start
 
 	if Input.is_action_just_released("Selecting"):
-		selected = true
 		selecting = false
+		_selected()
 	
 	queue_redraw()
 
@@ -39,15 +39,17 @@ func _input(event):
 func _draw() -> void: if selecting: draw_rect(Rect2(selection_start, selection_end), selection_color)
 
 
-func _process(_delta):
-	if selected:
-		for child in old_selected_list: child.selected = false
+func _selected():
+	var players = get_tree().get_nodes_in_group("Players")
+	for child in old_selected_list: child.selected = false
+	new_selected_list = []
+	for child in players:
+		if Rect2(selection_start, selection_end).abs().has_point(child.position):
+			new_selected_list.append(child)
+			child.selected = true
 		
-		new_selected_list = []
-		for child in selectable_list:
-			if Rect2(selection_start, selection_end).abs().has_point(child.position):
-				new_selected_list.append(child)
-				child.selected = true
-			
-		old_selected_list = new_selected_list
-		selected = false
+	old_selected_list = new_selected_list
+	selected = false
+
+func _process(_delta):
+	pass

@@ -160,7 +160,7 @@ _data = {
 "Walk": SubResource("Animation_crhet")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Players"]]
 script = ExtResource("1_lac08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
