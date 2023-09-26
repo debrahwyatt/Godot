@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ml0jwu31yxk"]
+
+[ext_resource type="Script" path="res://Dropdown Menu/Context Menu.gd" id="1_8vdyj"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8vdyj")
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
