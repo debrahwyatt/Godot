@@ -6,14 +6,14 @@ var Player = preload("res://Player/player.tscn")
 var Water = preload("res://Water.tscn")
 
 var map = []
-var rows = 25       # Number of rows in the grid
-var cols = 50     # Number of columns in the grid
+var rows = 35       # Number of rows in the grid
+var cols = 75     # Number of columns in the grid
 var grid_size = 50.0
 var rng = RandomNumberGenerator.new()
 
 var grid_colour
-var water = Color(0, 0.5, 1)  # Water blue
-var grass = Color(0, 0.5, 0.1)  # Dark grass green
+var water_colour = Color(0, 0.5, 1)  # Water blue
+var grass_colour = Color(0, 0.5, 0.1)  # Dark grass green
 
 var bushes = 3
 
@@ -28,9 +28,44 @@ func generate_map():
 	for x in rows:
 		map.append([])
 		for y in cols:
-			map[x].append({"terrain": tile(), "structure": ""})
+			map[x].append({"terrain": "", "structure": "", "x": x, "y": y})
 	
+	generate_water_features()
+	
+	for x in rows:
+		for y in cols:
+			if map[x][y]["terrain"] != "water": map[x][y]["terrain"] = "grass"
+			
 	return map
+
+func generate_water_features():
+	var potential_list = []
+	var size_of_feature = 1500
+	var random_x = randi() % rows
+	var random_y = randi() % cols
+	if (map[random_x][random_y]["terrain"] == ""): #Else try again
+		map[random_x][random_y]["terrain"] = "water"
+	if random_x + 1 < rows: potential_list.append(map[random_x + 1][random_y])
+	if random_x - 1 >= 0: potential_list.append(map[random_x - 1][random_y])
+	if random_y + 1 < cols: potential_list.append(map[random_x][random_y + 1])
+	if random_y - 1 >= 0: potential_list.append(map[random_x][random_y - 1])
+	
+	var counter = 0
+	while true:
+		var index = randi() % potential_list.size()
+		var randomItem = potential_list[index]
+		if randomItem["terrain"] == "water": 
+			potential_list.erase(index)
+			continue
+		
+		randomItem["terrain"] = "water"
+		if randomItem["x"] + 1 < rows: potential_list.append(map[randomItem["x"] + 1][randomItem["y"]])
+		if randomItem["x"] - 1 >= 0: potential_list.append(map[randomItem["x"] - 1][randomItem["y"]])
+		if randomItem["y"] + 1 < cols: potential_list.append(map[randomItem["x"]][randomItem["y"] + 1])
+		if randomItem["y"] - 1 >= 0: potential_list.append(map[randomItem["x"]][randomItem["y"] - 1])
+		
+		counter += 1
+		if counter > size_of_feature: break
 
 
 func generate_bushs(count):
@@ -55,8 +90,8 @@ func _draw():
 		for col in range(cols):
 			var x = col * grid_size
 			var y = row * grid_size
-			if(map[row][col]["terrain"] == "water"): grid_colour = water
-			if(map[row][col]["terrain"] == "grass"): grid_colour = grass
+			if(map[row][col]["terrain"] == "water"): grid_colour = water_colour
+			if(map[row][col]["terrain"] == "grass"): grid_colour = grass_colour
 			draw_rect(Rect2(x, y, grid_size, grid_size), grid_colour)
 
 
