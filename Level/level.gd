@@ -9,6 +9,7 @@ var map = []
 var rows = 35       # Number of rows in the grid
 var cols = 75     # Number of columns in the grid
 var grid_size = 50.0
+var water_percent = 0.25
 var rng = RandomNumberGenerator.new()
 
 var grid_colour
@@ -40,32 +41,43 @@ func generate_map():
 
 func generate_water_features():
 	var potential_list = []
-	var size_of_feature = 1500
-	var random_x = randi() % rows
-	var random_y = randi() % cols
-	if (map[random_x][random_y]["terrain"] == ""): #Else try again
-		map[random_x][random_y]["terrain"] = "water"
-	if random_x + 1 < rows: potential_list.append(map[random_x + 1][random_y])
-	if random_x - 1 >= 0: potential_list.append(map[random_x - 1][random_y])
-	if random_y + 1 < cols: potential_list.append(map[random_x][random_y + 1])
-	if random_y - 1 >= 0: potential_list.append(map[random_x][random_y - 1])
+	var total_water = water_percent * cols * rows
 	
-	var counter = 0
-	while true:
-		var index = randi() % potential_list.size()
-		var randomItem = potential_list[index]
-		if randomItem["terrain"] == "water": 
-			potential_list.erase(index)
-			continue
+	var sum = 0
+	var water_features = []
+	while sum < total_water:
+		var temp = randi() % int(total_water/2)
+		water_features.append(temp)
+		sum += temp
+	
+	for feature_size in water_features:
+		var random_x = randi() % rows
+		var random_y = randi() % cols
+		if (map[random_x][random_y]["terrain"] == ""): #Else try again
+			map[random_x][random_y]["terrain"] = "water"
+		if random_x + 1 < rows: potential_list.append(map[random_x + 1][random_y])
+		if random_x - 1 >= 0: potential_list.append(map[random_x - 1][random_y])
+		if random_y + 1 < cols: potential_list.append(map[random_x][random_y + 1])
+		if random_y - 1 >= 0: potential_list.append(map[random_x][random_y - 1])
 		
-		randomItem["terrain"] = "water"
-		if randomItem["x"] + 1 < rows: potential_list.append(map[randomItem["x"] + 1][randomItem["y"]])
-		if randomItem["x"] - 1 >= 0: potential_list.append(map[randomItem["x"] - 1][randomItem["y"]])
-		if randomItem["y"] + 1 < cols: potential_list.append(map[randomItem["x"]][randomItem["y"] + 1])
-		if randomItem["y"] - 1 >= 0: potential_list.append(map[randomItem["x"]][randomItem["y"] - 1])
 		
-		counter += 1
-		if counter > size_of_feature: break
+		
+		var counter = 0
+		while true:
+			var index = randi() % potential_list.size()
+			var randomItem = potential_list[index]
+			if randomItem["terrain"] == "water": 
+				potential_list.erase(index)
+				continue
+			
+			randomItem["terrain"] = "water"
+			if randomItem["x"] + 1 < rows: potential_list.append(map[randomItem["x"] + 1][randomItem["y"]])
+			if randomItem["x"] - 1 >= 0: potential_list.append(map[randomItem["x"] - 1][randomItem["y"]])
+			if randomItem["y"] + 1 < cols: potential_list.append(map[randomItem["x"]][randomItem["y"] + 1])
+			if randomItem["y"] - 1 >= 0: potential_list.append(map[randomItem["x"]][randomItem["y"] - 1])
+			
+			counter += 1
+			if counter > feature_size: break
 
 
 func generate_bushs(count):

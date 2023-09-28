@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
+enum Gender { FEMALE, MALE }
+
 #Load Nodes
 @onready var Name = $Name
-@onready var player_selection = $PlayerSelection
+@onready var player_selection = $Selection
 
 var eat_sound = preload("res://Player/chew.wav")
 var Berries = preload("res://Dingleberry Bush/berry_bush.gd")
+var Player = preload("res://Player/player.tscn")
 
 var berries = Berries.new()
 
@@ -15,7 +18,7 @@ var rng = RandomNumberGenerator.new()
 func rnd():	return rng.randf_range(-10.0, 10.0)
 
 var p_name = "Richard"
-
+var gender = randi() % 2
 var speed_max = 100.0 + rnd()
 var speed_cur = speed_max
 
@@ -88,18 +91,36 @@ func _physics_process(_delta):
 
 
 func eat(value):
-	$AudioStreamPlayer2D.play()
+	$AudioStream2D.play()
 	if value == null: value = 0 # TODO: value coming up as null?
 	hunger_cur += value
 	if hunger_cur > 100: hunger_cur = hunger_max 
 	
 
+func interact(player2):
+	if gender == Gender.FEMALE && player2.gender == Gender.MALE:
+		var new_player = Player.instantiate()
+		new_player.position = Vector2(self.get_position().x , self.get_position().y)
+		call_deferred("add_child", new_player)
+		
+	
 func _on_area_2d_area_entered(area):
+	var parent = area.get_parent()
 	var children = area.get_parent().get_children()
-	var temp = []
+	var berry_list = []
+	var player2 
+		
+	var berry = RegEx.new()
+	berry.compile('Berry.*')
 	
-	var regex = RegEx.new()
-	regex.compile('Berry.*')
+	var player = RegEx.new()
+	player.compile('Player.*')
 	
-	for x in children: if regex.search(x.name): temp.append(x)
-	if temp: eat(berries.pick(temp))
+
+	if player.search(parent.name): player2 = parent
+	
+	for x in children: 
+		if berry.search(x.name): berry_list.append(x)
+			
+	if berry_list: eat(berries.pick(berry_list))
+	if player2: interact(player2)
