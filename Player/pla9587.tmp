@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bvx6csu4o535u" path="res://Player/player_foot.png" id="5_ih7ea"]
 [ext_resource type="AudioStream" uid="uid://btrp5rlx1b3gh" path="res://Player/chew.wav" id="6_oiecs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
-size = Vector2(52, 20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_mea13"]
+radius = 26.0192
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
 radius = 40.0
@@ -164,7 +164,7 @@ _data = {
 script = ExtResource("1_lac08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4ck0i")
+shape = SubResource("CircleShape2D_mea13")
 
 [node name="Name" type="RichTextLabel" parent="."]
 visible = false

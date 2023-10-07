@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhg10hv3sscmi"]
+
+[ext_resource type="Script" path="res://Bush/Berry.gd" id="1_40n8q"]
+[ext_resource type="Texture2D" uid="uid://c1cixjc582py3" path="res://Bush/berry.png" id="2_6lgw3"]
+
+[node name="Berry" type="Node2D"]
+script = ExtResource("1_40n8q")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_6lgw3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.9
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

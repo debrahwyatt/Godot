@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b28mgcu4bne5g"
-path="res://.godot/imported/berry_bush.png-a39fdeda32f18954ec06f762e58ca812.ctex"
+uid="uid://vh2f4guf5g1a"
+path="res://.godot/imported/Tree.png-1db3025bd4d8659abf9c08b15870b476.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dingleberry Bush/berry_bush.png"
-dest_files=["res://.godot/imported/berry_bush.png-a39fdeda32f18954ec06f762e58ca812.ctex"]
+source_file="res://Tree/Tree.png"
+dest_files=["res://.godot/imported/Tree.png-1db3025bd4d8659abf9c08b15870b476.ctex"]
 
 [params]
 
