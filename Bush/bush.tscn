@@ -5,32 +5,33 @@
 [ext_resource type="Texture2D" uid="uid://b28mgcu4bne5g" path="res://Bush/berry_bush.png" id="3_ewbqy"]
 [ext_resource type="PackedScene" uid="uid://dhg10hv3sscmi" path="res://Bush/Berry.tscn" id="4_xacsb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
-size = Vector2(64, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y5lho"]
 size = Vector2(48, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
+size = Vector2(64, 32)
 
 [node name="Bush" type="StaticBody2D"]
 position = Vector2(112, 64)
 script = ExtResource("1_j56yg")
 
-[node name="Selection" type="Sprite2D" parent="."]
-position = Vector2(0, 10.75)
-scale = Vector2(1, 1.2619)
-texture = ExtResource("2_ju7mc")
-
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Interatction" type="CollisionShape2D" parent="Area2D" groups=["Targetable"]]
-shape = SubResource("RectangleShape2D_m6ef0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_y5lho")
 
+[node name="Interaction" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m6ef0")
+
 [node name="Bush" type="Sprite2D" parent="."]
 texture = ExtResource("3_ewbqy")
+
+[node name="Selection" type="Sprite2D" parent="Bush"]
+visible = false
+position = Vector2(0, 10.75)
+scale = Vector2(1, 1.2619)
+texture = ExtResource("2_ju7mc")
 
 [node name="Berry1" parent="." instance=ExtResource("4_xacsb")]
 position = Vector2(24, 0)

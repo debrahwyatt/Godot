@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cafhvyq53aavb"]
+[gd_scene load_steps=6 format=3 uid="uid://cafhvyq53aavb"]
 
 [ext_resource type="Shader" path="res://Overlay/UI.gdshader" id="1_end3m"]
 
@@ -8,6 +8,14 @@
 shader = ExtResource("1_end3m")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7us0m"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sibr2"]
+resource_local_to_scene = true
+blend_mode = 3
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = true
 
 [node name="UIOverlay" type="Control"]
 layout_mode = 3
@@ -38,6 +46,7 @@ offset_bottom = 64.0
 modulate = Color(0.929412, 0.823529, 0.329412, 1)
 self_modulate = Color(0.909804, 0.694118, 0, 1)
 show_behind_parent = true
+material = SubResource("CanvasItemMaterial_sibr2")
 layout_mode = 0
 offset_top = 512.0
 offset_right = 1152.0

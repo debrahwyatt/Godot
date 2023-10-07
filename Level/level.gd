@@ -1,7 +1,7 @@
 extends Node2D
 
 var map = []
-var rows = 35
+var rows = 42
 var cols = 77
 var grid_size = 50.0
 
@@ -158,12 +158,15 @@ func _draw():
 			if(map[row][col]["terrain"] == "deep_water"): grid_colour = deep_water_colour
 			draw_rect(Rect2(x, y, grid_size, grid_size), grid_colour)
 
+var count2 = 0
 
 func PlaceObject(object, row, col, x, y):
 	if(map[row][col]["structure"] == object["name"]): 
 		var new_object = object["node"].instantiate()
 		new_object.position = Vector2(x + grid_size/2, y + grid_size/2)
 		new_object.map_coordinates = [row, col]
+		new_object.name = object["name"].capitalize() + str(count2)
+		count2 += 1
 		add_child(new_object)
 
 

@@ -2,8 +2,8 @@ extends StaticBody2D
 
 var berry_bush = preload("res://Bush/bush.tscn")
 
-@onready var Selectable_Space = $ObjectSpace
-@onready var Selection = $Selection
+@onready var Selectable_Space = $Area2D/Collision
+@onready var Selection = $Interaction
 
 var targeted = false
 
@@ -15,8 +15,13 @@ var player_list = []
 
 
 func interact(_this_tree): 
-	print("here")
+	print("interact with tree")
 
+func Targeted():
+	print("targeted tree")
+
+func Selected(boolean):
+	Selection.visible = boolean
 
 func _input(_event):
 	if Input.is_action_just_pressed("Targeting") && Rect2(Selectable_Space.global_position - Selectable_Space.shape.extents * 1.5, Selectable_Space.shape.extents * 3).abs().has_point(get_global_mouse_position()):

@@ -7,7 +7,7 @@ enum Gender { FEMALE, MALE }
 
 #Load Nodes
 @onready var Name = $Name
-@onready var player_selection = $Selection
+@onready var Selection = $Selection
 
 var eat_sound = preload("res://Player/chew.wav")
 
@@ -54,9 +54,10 @@ func _ready():
 	Name.text = p_name
 	ui_list.append(Name)
 
-
-func select_unit():
-	selected = true
+func Selected(boolean):
+	selected = boolean
+	Selection.visible = boolean
+	
 
 func _input(_event):
 	if Input.is_action_pressed("Moving") and selected:
@@ -128,10 +129,11 @@ func interact(_player2):
 #		call_deferred("add_sibling", new_player)
 
 
-func _on_area_2d_area_entered(area):
-	for x in area.get_parent().get_children():
-		if x == cur_target:
-			x.get_parent().interact()
+func _on_area_2d_area_entered(_area):
+	pass
+#	for x in area.get_parent().get_children():
+#		if x == cur_target:
+#			x.get_parent().interact()
 
 
 #	var player2 
@@ -142,7 +144,6 @@ func _on_area_2d_area_entered(area):
 
 func _physics_process(_delta):
 	if health_cur <= 0: return
-	player_selection.visible = selected # TODO: Don't need to check every moment
 #	showUI()
 	move(_delta)
 

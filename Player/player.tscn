@@ -7,11 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://bvx6csu4o535u" path="res://Player/player_foot.png" id="5_ih7ea"]
 [ext_resource type="AudioStream" uid="uid://btrp5rlx1b3gh" path="res://Player/chew.wav" id="6_oiecs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
-size = Vector2(52, 20)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
 radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
+size = Vector2(52, 20)
 
 [sub_resource type="Animation" id="Animation_5pere"]
 resource_name = "Idle"
@@ -163,7 +163,19 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
 script = ExtResource("1_lac08")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Selection" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+texture = ExtResource("2_so482")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -33.5)
+
+[node name="Interaction" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33.5)
+shape = SubResource("CircleShape2D_lgs1t")
+
+[node name="Collision" type="CollisionShape2D" parent="." groups=["Selectable"]]
 shape = SubResource("RectangleShape2D_4ck0i")
 
 [node name="Name" type="RichTextLabel" parent="."]
@@ -181,17 +193,6 @@ size_flags_vertical = 4
 text = "Name Box"
 fit_content = true
 metadata/_edit_use_anchors_ = true
-
-[node name="Selection" type="Sprite2D" parent="."]
-position = Vector2(0, 0.5)
-texture = ExtResource("2_so482")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -33.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 33.5)
-shape = SubResource("CircleShape2D_lgs1t")
 
 [node name="Sprite" type="Node2D" parent="."]
 

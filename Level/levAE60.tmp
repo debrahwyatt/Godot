@@ -22,4 +22,3 @@ position = Vector2(176, 320)
 position = Vector2(360, 248)
 
 [node name="Selection" parent="." instance=ExtResource("4_10ub3")]
-z_index = 1

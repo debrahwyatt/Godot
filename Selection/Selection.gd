@@ -8,7 +8,6 @@ var timer_elapsed = 0.0
 var action_pressed = false
 
 var selected_list = []
-var new_selected_list = []
 
 var selection_end = Vector2()
 var selection_start = Vector2()
@@ -20,39 +19,43 @@ var target
 func _target():
 	for x in get_tree().get_nodes_in_group("Targetable"):
 		if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
-			for y in selected_list: y.cur_target = x.get_parent()
+			for y in selected_list: 
+				target = x.get_parent().get_parent()
+				target.Targeted()
+				y.cur_target = x.get_parent()
 			return
 
 
 func _input(event):
-	
+	queue_redraw()
 	if Input.is_action_just_pressed("Targeting") and selected_list != []: _target()
 	
 	if Input.is_action_just_pressed("Selecting"):
 		selection_start = event.position
 		selection_end = event.position
 	
-	if Input.is_action_pressed("Selecting"): selecting = true
+	if Input.is_action_pressed("Selecting"): 
+		selecting = true
+		selection_end = event.position - selection_start
+
 
 	if Input.is_action_just_released("Selecting") && selection_end != Vector2(0, 0):
 		selecting = false
-		_selected()
+		SelectGroup("Players")
 		
-#	if Input.is_action_just_released("Selecting") && selection_end == Vector2(0, 0):
-#		selecting = false
-#		$RayCast2D.position = get_local_mouse_position()
-#		$RayCast2D.target_position = get_local_mouse_position() + Vector2(1, 1)
-#		var object = $RayCast2D.get_collider()
-#		print($RayCast2D.target_position)
-#		print(get_local_mouse_position())
-#
-#		if object && object.has_method("select_unit"):
-#			print(object.position)
-#			object.select_unit()
-#			selected_list.append(object)
-		
-	queue_redraw()
-	if selecting: selection_end = event.position - selection_start
+	if Input.is_action_just_released("Selecting") && selection_end == Vector2(0, 0):
+		for x in get_tree().get_nodes_in_group("Selectable"):
+			if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
+				var child = x.get_parent().get_parent()
+				if child.name == "level": child = x.get_parent()
+				for item in selected_list: item.Selected(false)
+				child.Selected(true)
+				selected_list = [child]
+				return
+				
+		if selected_list != []:
+			for child in selected_list: child.Selected(false)
+			selected_list = []
 
 
 func _draw() -> void: 
@@ -60,14 +63,16 @@ func _draw() -> void:
 		draw_rect(Rect2(selection_start, selection_end), selection_color)
 
 
-func _selected():
-	var players = get_tree().get_nodes_in_group("Players")
-	for child in selected_list: child.selected = false
-	new_selected_list = []
+func SelectGroup(group):
+	
+	var new_selected_list = []
+	for child in selected_list: child.Selected(false)
+	
+	var players = get_tree().get_nodes_in_group(group)
 	for child in players:
 		if Rect2(selection_start, selection_end).abs().has_point(child.position):
 			new_selected_list.append(child)
-			child.selected = true
-		
+			child.Selected(true)
+	
 	selected_list = new_selected_list
 	selected = false
