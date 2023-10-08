@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Godot"
-run/main_scene="res://Level/level.tscn"
+config/name="Tallmen"
+run/main_scene="res://Scenes/Level.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [input]

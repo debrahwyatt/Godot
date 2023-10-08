@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cafhvyq53aavb"]
+
+[ext_resource type="Script" path="res://Scripts/UI.gd" id="1_61xjn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7us0m"]
+
+[node name="UIOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_61xjn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Button0" type="Button" parent="Panel"]
+modulate = Color(0.792157, 0.690196, 0.678431, 1)
+self_modulate = Color(0.92549, 0, 0.501961, 1)
+layout_mode = 0
+offset_left = 1088.0
+offset_right = 1152.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Panel"]
+material = SubResource("ShaderMaterial_7us0m")
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 64.0
+
+[node name="Panel2" type="Panel" parent="."]
+modulate = Color(0.929412, 0.823529, 0.329412, 1)
+self_modulate = Color(0.909804, 0.694118, 0, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_top = 512.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="Panel2"]
+material = SubResource("ShaderMaterial_7us0m")
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 64.0

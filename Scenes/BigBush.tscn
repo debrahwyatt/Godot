@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0jb883rkldo2"]
+
+[ext_resource type="Script" path="res://Scripts/BigBush.gd" id="1_jylu1"]
+[ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_qvafh"]
+[ext_resource type="Texture2D" uid="uid://805j507ihtlq" path="res://Assets/BigBush/Bush.svg" id="3_814mt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
+size = Vector2(112, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5lho"]
+size = Vector2(82, 1)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+position = Vector2(112, 64)
+script = ExtResource("1_jylu1")
+
+[node name="Selection" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.200001, -2)
+scale = Vector2(2.15849, 1.52381)
+texture = ExtResource("2_qvafh")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.200005, -28.5)
+
+[node name="Interatction" type="CollisionShape2D" parent="Area2D" groups=["Targetable"]]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_m6ef0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_y5lho")
+
+[node name="Bush" type="Sprite2D" parent="."]
+position = Vector2(0, -40)
+texture = ExtResource("3_814mt")
