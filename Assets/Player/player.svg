@@ -8,12 +8,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="20"
-   height="68"
-   viewBox="0 0 5.2916668 17.991747"
+   width="40"
+   height="80"
+   viewBox="0 0 10.583332 21.166767"
    version="1.1"
    id="svg8"
    sodipodi:docname="player.svg"
@@ -38,16 +37,6 @@
        apply_no_weight="true"
        apply_with_weight="true"
        only_selected="false" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4542"
-       id="linearGradient4544"
-       x1="-3.8270378"
-       y1="296.92862"
-       x2="9.9691544"
-       y2="296.92862"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(16.701897,6.2130114)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -57,8 +46,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.2"
-     inkscape:cx="53.980691"
-     inkscape:cy="43.429212"
+     inkscape:cx="29.650334"
+     inkscape:cy="22.588531"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -76,7 +65,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -84,20 +73,20 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-279.00775)">
+     transform="translate(0,-275.83279)">
     <rect
        id="rect3713"
        width="5.2155423"
        height="15.086337"
-       x="0.080038607"
-       y="281.72531"
+       x="2.3006585"
+       y="279.90628"
        style="fill:#800080;stroke-width:0.47414115"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
        id="path3722"
-       cx="2.6878099"
-       cy="281.72531"
+       cx="4.9084296"
+       cy="279.90628"
        style="fill:#800080;stroke-width:0.61332577"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
@@ -106,8 +95,8 @@
     <ellipse
        style="fill:#333333;stroke-width:0.61017787"
        id="path3726"
-       cx="17.301655"
-       cy="291.65817"
+       cx="7.8049607"
+       cy="294.87097"
        rx="2.6077712"
        ry="1.8745673"
        inkscape:export-xdpi="96"
@@ -115,8 +104,8 @@
     <ellipse
        style="fill:#333333;stroke-width:0.61017787"
        id="path3726-3"
-       cx="15.382866"
-       cy="296.85538"
+       cx="2.6969831"
+       cy="294.98911"
        rx="2.6077712"
        ry="1.8745673"
        inkscape:export-xdpi="96"
@@ -124,15 +113,15 @@
     <ellipse
        style="fill:#ffffff;stroke-width:0.62122917"
        id="path3745"
-       cx="1.9160686"
-       cy="283.56662"
+       cx="4.1366882"
+       cy="281.74759"
        ry="1.0057559"
        rx="0.78233135"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.45805219px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 1.6447014,286.40097 H 4.2524729"
+       d="M 3.8653212,284.58195 H 6.4730927"
        id="path3749"
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="96"
@@ -146,8 +135,8 @@
     <ellipse
        rx="0.78233135"
        ry="1.0057559"
-       cy="283.56662"
-       cx="1.9054785"
+       cy="281.74759"
+       cx="4.1260982"
        id="ellipse3780"
        style="fill:#ffffff;stroke-width:0.62122917"
        inkscape:export-xdpi="96"
@@ -155,8 +144,8 @@
     <ellipse
        rx="0.78233135"
        ry="1.0057559"
-       cy="283.58817"
-       cx="3.9916961"
+       cy="281.76913"
+       cx="6.212316"
        id="ellipse3780-9"
        style="fill:#ffffff;stroke-width:0.62122917"
        inkscape:export-xdpi="96"
@@ -164,8 +153,8 @@
     <ellipse
        style="fill:#000000;stroke-width:1.20256448"
        id="path3801"
-       cx="10.393656"
-       cy="284.17719"
+       cx="4.1570206"
+       cy="281.7912"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
        rx="0.26077715"
@@ -173,20 +162,11 @@
     <ellipse
        style="fill:#000000;stroke-width:1.2025646"
        id="path3801-5"
-       cx="12.472575"
-       cy="284.17719"
+       cx="6.23594"
+       cy="281.7912"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
        rx="0.26077715"
        ry="0.25143898" />
-    <ellipse
-       style="fill:#ff00ff;fill-opacity:0;stroke:url(#linearGradient4544);stroke-width:0.26458451"
-       id="path27"
-       cx="19.772955"
-       cy="303.14163"
-       rx="6.8980961"
-       ry="2.6694686"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
   </g>
 </svg>

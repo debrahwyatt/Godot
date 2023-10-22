@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyvj0qiu7wfjs"]
+
+[ext_resource type="Texture2D" uid="uid://crplq7qoqol18" path="res://Assets/Mountain.svg" id="1_2xh75"]
+[ext_resource type="Script" path="res://Scripts/Mountain.gd" id="1_g85vq"]
+
+[node name="Node2D" type="StaticBody2D"]
+script = ExtResource("1_g85vq")
+
+[node name="Mountain" type="Sprite2D" parent="."]
+texture = ExtResource("1_2xh75")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 96)
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 96, -40, 40, -152, -8, -144, -40, -128, -96, -24)
+one_way_collision_margin = 10.0

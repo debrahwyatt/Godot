@@ -2,11 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="50"
@@ -15,9 +17,28 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="Player Selection.svg">
+   sodipodi:docname="Selection.svg">
   <defs
-     id="defs2" />
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4542"
+       id="linearGradient4544"
+       x1="-3.8270378"
+       y1="296.92862"
+       x2="9.9691544"
+       y2="296.92862"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.99999553,0,0,0.99999553,18.218645,-2.9173688)" />
+    <linearGradient
+       id="linearGradient4542"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#00ff00;stop-opacity:1;"
+         offset="0"
+         id="stop4540" />
+    </linearGradient>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -26,8 +47,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="31.678384"
-     inkscape:cx="29.615576"
-     inkscape:cy="13.008143"
+     inkscape:cx="62.220371"
+     inkscape:cy="7.4838713"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +66,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,5 +91,14 @@
        height="2.8230343"
        x="-2.7896259"
        y="287.82095" />
+    <ellipse
+       style="fill:#ff00ff;fill-opacity:0;stroke:url(#linearGradient4544);stroke-width:0.26458332"
+       id="path27"
+       cx="21.289688"
+       cy="294.00989"
+       rx="6.8980651"
+       ry="2.6694565"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>

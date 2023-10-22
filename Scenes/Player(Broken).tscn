@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvc226vtvoos3"]
+[gd_scene load_steps=17 format=3 uid="uid://cvc226vtvoos3"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q0yir"]
 [ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_2dbk4"]
@@ -7,14 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://bvx6csu4o535u" path="res://Assets/Player/foot.png" id="5_xiyo4"]
 [ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_rh2o7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
-radius = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
+size = Vector2(38, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082hf"]
 size = Vector2(20, 74)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
-size = Vector2(38, 15)
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i1s1"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
+radius = 50.0
 
 [sub_resource type="Animation" id="Animation_5pere"]
 resource_name = "Idle"
@@ -171,20 +174,26 @@ visible = false
 position = Vector2(0, 0.5)
 texture = ExtResource("2_2dbk4")
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4ck0i")
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -33.5)
-
-[node name="Interaction" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 33.5)
-shape = SubResource("CircleShape2D_lgs1t")
 
 [node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable"]]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_082hf")
+disabled = true
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_4ck0i")
+[node name="Terrain" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33)
+shape = SubResource("CircleShape2D_6i1s1")
+
+[node name="Interaction" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33.5)
+shape = SubResource("CircleShape2D_lgs1t")
+disabled = true
 
 [node name="Name" type="RichTextLabel" parent="."]
 visible = false

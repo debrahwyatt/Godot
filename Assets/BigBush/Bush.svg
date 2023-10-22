@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,7 +55,7 @@
      id="layer1"
      transform="translate(0,-270.54165)">
     <ellipse
-       style="fill:#255b06;stroke-width:0.48758388;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.48758388;fill-opacity:1"
        id="path10"
        cx="9.0448046"
        cy="289.62454"
@@ -64,7 +64,7 @@
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
-       style="fill:#255b06;stroke-width:0.29671913;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.29671913;fill-opacity:1"
        id="path12"
        cx="20.626478"
        cy="285.12149"
@@ -73,7 +73,7 @@
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
-       style="fill:#255b06;stroke-width:0.72710252;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.72710252;fill-opacity:1"
        id="path14"
        cx="16.245491"
        cy="279.6463"
@@ -82,7 +82,7 @@
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
-       style="fill:#255b06;stroke-width:0.42040882;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.42040882;fill-opacity:1"
        id="path12-3"
        cx="19.808313"
        cy="291.05984"
@@ -91,7 +91,7 @@
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
-       style="fill:#255b06;stroke-width:0.49873796;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.49873796;fill-opacity:1"
        id="path14-3"
        cx="7.8176332"
        cy="280.26224"
@@ -100,7 +100,7 @@
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
     <ellipse
-       style="fill:#255b06;stroke-width:0.34658062;fill-opacity:1"
+       style="fill:#204e05;stroke-width:0.34658062;fill-opacity:1"
        id="path14-3-4"
        cx="10.423512"
        cy="277.05499"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbq44of38lr42"]
+[gd_scene load_steps=7 format=3 uid="uid://bbq44of38lr42"]
 
 [ext_resource type="Script" path="res://Scripts/Tree.gd" id="1_sj8n5"]
 [ext_resource type="Texture2D" uid="uid://ctqn87takh4c7" path="res://Assets/Player/player_selection2.png" id="2_x4tcb"]
@@ -8,18 +8,26 @@
 size = Vector2(23, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
-size = Vector2(50, 37.5)
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6omv3"]
+size = Vector2(20, 56)
 
 [node name="Tree" type="StaticBody2D"]
 script = ExtResource("1_sj8n5")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="Collision" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_y5lho")
 
-[node name="Interaction" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Interaction" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_m6ef0")
+
+[node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
+position = Vector2(0, -20)
+scale = Vector2(1, 1.02831)
+shape = SubResource("RectangleShape2D_6omv3")
 
 [node name="Selection" type="Sprite2D" parent="."]
 visible = false

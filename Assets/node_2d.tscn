@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://csbau0xliubo4"]
+
+[ext_resource type="Texture2D" uid="uid://qj044hnf6ydm" path="res://Assets/UI.svg" id="1_fqei8"]
+
+[node name="Node2D" type="NinePatchRect"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.201
+offset_left = -1.0
+offset_right = -2.0
+offset_bottom = 518.752
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fqei8")
+patch_margin_left = 100
+patch_margin_right = 90
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

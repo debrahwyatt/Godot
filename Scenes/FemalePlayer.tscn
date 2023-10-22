@@ -1,0 +1,247 @@
+[gd_scene load_steps=17 format=3 uid="uid://buuf27te003dh"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0knyc"]
+[ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_mj4ic"]
+[ext_resource type="Texture2D" uid="uid://c5bryj2es73t0" path="res://Assets/Player/eyes.png" id="4_dpwxc"]
+[ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_vxyk0"]
+[ext_resource type="Texture2D" uid="uid://c6hpbv7dctuph" path="res://Assets/Player/FemaleBody.png" id="6_yt2a7"]
+[ext_resource type="Texture2D" uid="uid://bqqth8satuv27" path="res://Assets/Player/FemaleFoot.png" id="7_4y0ex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
+size = Vector2(34, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_082hf"]
+size = Vector2(20, 66)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i1s1"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
+radius = 48.0
+
+[sub_resource type="Animation" id="Animation_5pere"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(9, 0), Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, 0), Vector2(-9, 0), Vector2(-8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2/FemaleBody:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -28), Vector2(0, -27), Vector2(0, -28)]
+}
+
+[sub_resource type="Animation" id="Animation_25tv0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2/FemaleBody:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -28)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2acmq"]
+_data = {
+"Idle": SubResource("Animation_5pere"),
+"RESET": SubResource("Animation_25tv0")
+}
+
+[sub_resource type="Animation" id="Animation_hvrxe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_crhet"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(8, -2), Vector2(8, 1), Vector2(8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, 0), Vector2(-8, 1), Vector2(-8, -1), Vector2(-8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m8xb1"]
+_data = {
+"RESET": SubResource("Animation_hvrxe"),
+"Walk": SubResource("Animation_crhet")
+}
+
+[node name="FemalePlayer" type="CharacterBody2D" groups=["Players"]]
+script = ExtResource("1_0knyc")
+
+[node name="Selection" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
+texture = ExtResource("2_mj4ic")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4ck0i")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -33.5)
+
+[node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable"]]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_082hf")
+disabled = true
+
+[node name="Terrain" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33)
+shape = SubResource("CircleShape2D_6i1s1")
+
+[node name="Interaction" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33.5)
+shape = SubResource("CircleShape2D_lgs1t")
+disabled = true
+
+[node name="Name" type="RichTextLabel" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -99.0
+offset_right = 80.0
+offset_bottom = -76.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Name Box"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2" type="Node2D" parent="."]
+
+[node name="FemaleBody" type="Sprite2D" parent="Sprite2"]
+position = Vector2(0, -28)
+texture = ExtResource("6_yt2a7")
+
+[node name="Foot1" type="Sprite2D" parent="Sprite2"]
+position = Vector2(8, 0)
+texture = ExtResource("7_4y0ex")
+
+[node name="Foot2" type="Sprite2D" parent="Sprite2"]
+position = Vector2(-8, 0)
+texture = ExtResource("7_4y0ex")
+
+[node name="Eyes" type="Sprite2D" parent="Sprite2"]
+visible = false
+position = Vector2(1, -44)
+texture = ExtResource("4_dpwxc")
+
+[node name="AudioStream2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -33.5)
+stream = ExtResource("6_vxyk0")
+
+[node name="IdleAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2acmq")
+}
+
+[node name="WalkAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m8xb1")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -5,15 +5,25 @@
 [ext_resource type="Texture2D" uid="uid://dmclw1k8ptkew" path="res://Assets/Bush/Bush.png" id="3_jbip5"]
 [ext_resource type="PackedScene" uid="uid://dhg10hv3sscmi" path="res://Scenes/Berry.tscn" id="4_cqusb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
-size = Vector2(64, 32)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y5lho"]
 size = Vector2(48, 18)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6ef0"]
+size = Vector2(64, 32)
+
+[node name="Bush" type="StaticBody2D"]
 position = Vector2(112, 64)
 script = ExtResource("1_at2g6")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_y5lho")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Interatction" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
+shape = SubResource("RectangleShape2D_m6ef0")
 
 [node name="Selection" type="Sprite2D" parent="."]
 visible = false
@@ -21,17 +31,7 @@ position = Vector2(0, 10.75)
 scale = Vector2(1, 1.2619)
 texture = ExtResource("2_h0lrf")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="Interatction" type="CollisionShape2D" parent="Area2D" groups=["Targetable"]]
-shape = SubResource("RectangleShape2D_m6ef0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_y5lho")
-disabled = true
-
-[node name="Bush" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_jbip5")
 
 [node name="Berry1" parent="." instance=ExtResource("4_cqusb")]
