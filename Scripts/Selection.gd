@@ -52,14 +52,10 @@ func _input(event):
 #		return
 		
 #	Let go of the select button, and select what's in the box
-	if Input.is_action_just_released("Selecting") && selection_end != Vector2(0, 0):
+	if Input.is_action_just_released("Selecting"):
+		if event.position - selection_start == Vector2(0, 0): SingleClickSelect()
+		else: SelectGroup("Players")
 		selecting = false
-		SelectGroup("Players")
-		
-		
-#	On single click and mouse doesn't move
-	if Input.is_action_just_released("Selecting") && selection_end == Vector2(0, 0):
-		SingleClickSelect()
 
 
 func Target():
@@ -68,9 +64,7 @@ func Target():
 	for x in get_tree().get_nodes_in_group("Targetable"):
 		if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
 			for y in selected_list: 
-				print(x.get_parent())
 				target = x.get_parent().get_parent()
-				print(target)
 				target.Targeted(true)
 				y.cur_target = x.get_parent()
 
@@ -79,16 +73,13 @@ func SingleClickSelect():
 	for x in get_tree().get_nodes_in_group("Selectable"):
 		if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
 			var child = x.get_parent().get_parent()
+			
 			if child.name == "level": child = x.get_parent()
 			for item in selected_list: item.Selected(false)
+			
 			child.Selected(true)
 			selected_list = [child]
 			UI.UpdateUI(selected_list)
-
-			
-	if selected_list != []:
-		for child in selected_list: child.Selected(false)
-		selected_list = []
 
 
 func SelectGroup(group):

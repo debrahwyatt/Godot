@@ -25,6 +25,8 @@ func rnd():	return rng.randf_range(-10.0, 10.0)
 var gender
 var p_name
 
+var map_coordinates
+
 var age = 18 + randi() % 5 + randi() % 1 
 var age_drain = 0.001
 
@@ -33,7 +35,7 @@ var speed_cur = speed_max
 
 var health_max = 100.0 + rnd()
 var health_cur = health_max
-var health_drain = 0.001
+var health_drain = 0.1
 
 var hunger_max = 100.0 + rnd()
 var hunger_cur = hunger_max
@@ -50,18 +52,20 @@ var happy_drain = 0.01
 
 var luck = 101
 
-var target_position = Vector2(0, 0)
-var map_coordinates
 var is_moving = false
-var is_moving2 = false
 var selected = false
+var to_target = false
+
 var cur_target = Node2D
 var input_vector = Vector2()
+var target_position = Vector2(0, 0)
 
 var terrain = "grass"
 var water_modifier = 0.66
 var deep_water_modifier = 0.33
 
+var direction = (target_position - position).normalized()
+	
 var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", "Willy"]
 var female_name_list = ["Darcy", "Regina", "Petunia", "Rose", "Tabitha", "Wendy", "Milly", "Winnifred"]
 
@@ -73,40 +77,8 @@ func initiate(g):
 	else: p_name = male_name_list[randi() % male_name_list.size()]
 
 
-func _input(_event):
-	
-	if (Input.is_action_just_pressed("Keyboard Movement") or Input.is_action_pressed("Keyboard Movement")) and selected:
-		is_moving2 = true
-		# Read input from arrow keys
-		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		return
-		
-	if (Input.is_action_just_released("Keyboard Movement")) and selected:
-		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		is_moving2 = false
-		return
-
-#	Only listen to keyboard inputs
-#	if _event is InputEventMouse: return
-
-#	Move this to the Selection Method?
-	if Input.is_action_pressed("Moving") and selected:
-		target_position = get_global_mouse_position()
-		is_moving = true
-
-
 func _on_area_2d_area_entered(area_object):
 	if cur_target == area_object: print("HERE")
-	
-#	if area_object
-#	if area_object.gender == 1 && gender == 0:
-#		interact(area_object)
-#	var player2 
-#	if player.search(parent.name): player2 = parent
-#	if berry_list: eat(berries.pick(berry_list))
-#	interact(player2)
 
 
 func _physics_process(_delta):
@@ -122,7 +94,7 @@ func _physics_process(_delta):
 		energy_cur -= energy_drain
 		if energy_cur < 0:
 			energy_cur = 0
-			health_cur -= energy_drain
+			health_cur -= health_drain
 
 
 func ChangeTerrain(new_terr):
@@ -136,6 +108,7 @@ func ChangeTerrain(new_terr):
 		speed_cur = speed_max * deep_water_modifier
 		energy_loss = true
 
+
 func Selected(boolean):
 	selected = boolean
 	Selection.visible = boolean
@@ -148,27 +121,30 @@ func Eat(value):
 	if hunger_cur > 100: hunger_cur = hunger_max
 
 
-#func makeNodesVisible(visibility):
-#	for child in ui_list: child.visible = visibility
+func _input(_event):
+	if Input.is_action_pressed("Moving") and selected:
+		target_position = get_global_mouse_position()
+		direction = (target_position - position).normalized()
+		is_moving = true
+		to_target = true
+		return
+
+	if Input.is_action_just_pressed("Keyboard Movement"):
+		is_moving = false
+		to_target = false
+		target_position = Vector2(-1, -1)
+	
+	if selected && to_target == false:
+		direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		if direction != Vector2(0, 0): is_moving = true
+		else: is_moving = false
 
 
-func KeyboardMove(_delta):
-		# Calculate the player's velocity based on input and speed
-	position = position + input_vector.normalized() * speed_cur * _delta
-#		move_and_slide()
-
-
+# This should be a state machine
 func Move(_delta):
 	if is_moving:
 		MoveToTarget(_delta)
-		move_and_slide()
-		$IdleAnimation.stop()
-		$WalkAnimation.play("Walk")
-		if energy_cur > 0: energy_cur -= energy_drain
-		if hunger_cur > 0: hunger_cur -= hunger_drain * 2
-#		else: health_cur -= 0.1
-	elif is_moving2:
-		KeyboardMove(_delta)
 		move_and_slide()
 		$IdleAnimation.stop()
 		$WalkAnimation.play("Walk")
@@ -184,9 +160,12 @@ func Move(_delta):
 
 
 func MoveToTarget(delta):
-	var direction = (target_position - position).normalized()
 	position += direction * speed_cur * delta
-	if position.distance_to(target_position) < 10.0: is_moving = false
+	if position.distance_to(target_position) < 10.0: 
+		is_moving = false
+		to_target = false
+		target_position = Vector2(-1, -1)
+
 
 func interact(player2):
 	pass

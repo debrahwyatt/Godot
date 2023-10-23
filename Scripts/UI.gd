@@ -20,19 +20,32 @@ var top_player
 var players = preload("res://Scenes/MalePlayer.tscn").instantiate()
 #var Player = preload("res://Scripts/Player.gd").new()
 
-var sex = ["Male", "Female"]
-
+var sex = ["Female", "Male"]
+enum Stats {BAR, VALUE}
 
 func _physics_process(_delta):
-	if top_player:
-		Health.get_child(1).text = str(int(top_player.health_cur)) + " / " + str(int(top_player.health_max))
-		Energy.get_child(1).text = str(int(top_player.energy_cur)) + " / " + str(int(top_player.energy_max))
-		Hunger.get_child(1).text = str(int(top_player.hunger_cur)) + " / " + str(int(top_player.hunger_max))
-		Happy.get_child(1).text = str(int(top_player.happy_cur)) + " / " + str(int(top_player.happy_max))
-		Speed.get_child(1).text = str(int(top_player.speed_cur)) 
-		Luck.get_child(1).text = str(int(top_player.luck))
-		Age.get_child(1).text = str(int(top_player.age))
+	if top_player && is_instance_valid(top_player):
 		
+		var x = 248
+
+		Health.get_child(Stats.VALUE).text = str(int(top_player.health_cur)) + " / " + str(int(top_player.health_max))
+		Health.get_child(Stats.BAR).size.x =int((top_player.health_cur / top_player.health_max) * x)
+		
+		Energy.get_child(Stats.VALUE).text = str(int(top_player.energy_cur)) + " / " + str(int(top_player.energy_max))
+		Energy.get_child(Stats.BAR).size.x = int((top_player.energy_cur / top_player.energy_max) * x)
+		
+		Hunger.get_child(Stats.VALUE).text = str(int(top_player.hunger_cur)) + " / " + str(int(top_player.hunger_max))
+		Hunger.get_child(Stats.BAR).size.x = int((top_player.hunger_cur / top_player.hunger_max) * x)
+		
+		Happy.get_child(Stats.VALUE).text = str(int(top_player.happy_cur)) + " / " + str(int(top_player.happy_max))
+		Happy.get_child(Stats.BAR).size.x = int((top_player.happy_cur / top_player.happy_max) * x)
+		
+		Speed.get_child(Stats.VALUE).text = str(int(top_player.speed_cur)) 
+		Luck.get_child(Stats.VALUE).text = str(int(top_player.luck))
+		Age.get_child(Stats.VALUE).text = str(int(top_player.age))
+	
+	else: MakeStatsVisible(false)
+
 
 func StatVisible(obj, boolean):
 	obj.visible = boolean
@@ -40,7 +53,7 @@ func StatVisible(obj, boolean):
 	
 	
 func MakeStatsVisible(boolean):
-	if top_player:
+	if top_player && is_instance_valid(top_player):
 		if top_player.gender == 0: FemalePlayer.visible = boolean
 		else: Player.visible = boolean
 	
@@ -67,13 +80,13 @@ func UpdateUI(sl):
 		MakeStatsVisible(true)
 		
 		Name.text = selected_list[0].p_name
-		Health.get_child(1).text = str(int(selected_list[0].health_cur)) + " / " + str(int(selected_list[0].health_max))
-		Energy.get_child(1).text = str(int(selected_list[0].energy_cur)) + " / " + str(int(selected_list[0].energy_max))
-		Hunger.get_child(1).text = str(int(selected_list[0].hunger_cur)) + " / " + str(int(selected_list[0].hunger_max))
-		Happy.get_child(1).text = str(int(selected_list[0].hunger_cur)) + " / " + str(int(selected_list[0].happy_max))
-		Sex.get_child(1).text = sex[selected_list[0].gender]
+		Health.get_child(Stats.VALUE).text = str(int(selected_list[0].health_cur)) + " / " + str(int(selected_list[0].health_max))		
+		Energy.get_child(Stats.VALUE).text = str(int(selected_list[0].energy_cur)) + " / " + str(int(selected_list[0].energy_max))
+		Hunger.get_child(Stats.VALUE).text = str(int(selected_list[0].hunger_cur)) + " / " + str(int(selected_list[0].hunger_max))
+		Happy.get_child(Stats.VALUE).text = str(int(selected_list[0].hunger_cur)) + " / " + str(int(selected_list[0].happy_max))
+		Sex.get_child(Stats.VALUE).text = sex[selected_list[0].gender]
 		
-		Speed.get_child(1).text = str(int(selected_list[0].speed_cur))
-		Luck.get_child(1).text = str(int(selected_list[0].luck))
-		Happy.get_child(1).text = str(int(selected_list[0].happy_cur))
-		Age.get_child(1).text = str(int(selected_list[0].age))
+		Speed.get_child(Stats.VALUE).text = str(int(selected_list[0].speed_cur))
+		Luck.get_child(Stats.VALUE).text = str(int(selected_list[0].luck))
+		Happy.get_child(Stats.VALUE).text = str(int(selected_list[0].happy_cur))
+		Age.get_child(Stats.VALUE).text = str(int(selected_list[0].age))

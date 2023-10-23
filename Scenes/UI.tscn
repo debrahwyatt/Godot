@@ -68,7 +68,7 @@ offset_bottom = 98.0
 text = "Health:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Health"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Health"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -94,8 +94,7 @@ offset_bottom = 138.0
 text = "Energy:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Energy"]
-layout_mode = 0
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Energy"]
 offset_left = 72.0
 offset_top = -8.0
 offset_right = 320.0
@@ -120,7 +119,7 @@ offset_bottom = 178.0
 text = "Hunger:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Hunger"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Hunger"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -147,7 +146,7 @@ offset_bottom = 218.0
 text = "Happy:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Happy"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Happy"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -174,7 +173,7 @@ offset_bottom = 218.0
 text = "Sex:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Sex"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Sex"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -200,7 +199,7 @@ offset_bottom = 138.0
 text = "Speed:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Speed"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Speed"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -227,7 +226,7 @@ offset_bottom = 98.0
 text = "Age:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Age"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Age"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
@@ -254,7 +253,7 @@ offset_bottom = 178.0
 text = "Luck:"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomBar/Luck"]
+[node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Luck"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0

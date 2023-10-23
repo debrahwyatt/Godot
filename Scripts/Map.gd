@@ -13,8 +13,6 @@ var grass = preload("res://Scenes/Grass.tscn").instantiate()
 var water = preload("res://Scenes/Water.tscn").instantiate()
 var deep_water = preload("res://Scenes/DeepWater.tscn").instantiate()
 
-#var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", "Willy"]
-#var female_name_list = ["Darcy", "Regina", "Petunia", "Rose", "Tabitha", "Wendy", "Milly", "Winnifred"]
 
 func GenerateWorld():
 	for x in rows:
@@ -36,10 +34,10 @@ func _init():
 	
 	GeneratePlayers(nodes["player"])
 	GenerateObj(nodes["structure"]["tree"])
+	GenerateObj(nodes["structure"]["bush"])
 	
-#	GenerateObj(nodes["bush"])
+#	GenerateObj(nodes["structure"]["big_bush"])
 #	GenerateLargeobj(nodes["structure"]["mountain"])
-#	Generateobj(nodes["big_bushes"])
 
 
 func _ready():
@@ -113,8 +111,7 @@ func GeneratePlayers(obj):
 		if map[x][y]["terrain"]["name"] == obj["terrain"] && map[x][y]["structure"]["name"] == "": 
 			map[x][y]["structure"] = obj
 			count -= 1
-	pass
-	
+
 
 func PlaceObj(obj, row, col):
 	var new_obj = obj["node"].instantiate()
