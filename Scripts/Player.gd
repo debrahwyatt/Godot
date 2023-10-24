@@ -81,16 +81,20 @@ func _on_area_2d_area_entered(area_object):
 	if cur_target == area_object: print("HERE")
 
 
+func Death():
+	queue_free()
+	
+	
 func _physics_process(_delta):
 	age += age_drain
-	if health_cur <= 0:
-		queue_free()
-		return
-
-	Move(_delta)
 	
-#	Drowning I think?
-	if energy_loss == true:
+	if health_cur <= 0: Death()
+	if energy_loss == true: Drowning()
+	
+	Move(_delta)
+
+
+func Drowning():
 		energy_cur -= energy_drain
 		if energy_cur < 0:
 			energy_cur = 0
@@ -129,12 +133,12 @@ func _input(_event):
 		to_target = true
 		return
 
-	if Input.is_action_just_pressed("Keyboard Movement"):
+	if Input.is_action_just_pressed("Keyboard Movement") && selected:
 		is_moving = false
 		to_target = false
 		target_position = Vector2(-1, -1)
 	
-	if selected && to_target == false:
+	if to_target == false && selected:
 		direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 		direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 		if direction != Vector2(0, 0): is_moving = true

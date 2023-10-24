@@ -95,6 +95,7 @@ text = "Energy:"
 horizontal_alignment = 2
 
 [node name="Bar" type="ColorRect" parent="CanvasLayer/BottomBar/Energy"]
+layout_mode = 0
 offset_left = 72.0
 offset_top = -8.0
 offset_right = 320.0
