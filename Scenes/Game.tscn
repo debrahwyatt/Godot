@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://df51iqlj5jds0"]
+[gd_scene load_steps=3 format=3 uid="uid://df51iqlj5jds0"]
 
-[ext_resource type="PackedScene" uid="uid://g1xa4wh5qodi" path="res://Scenes/Map.tscn" id="1_h6oyr"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_top5a"]
+[ext_resource type="PackedScene" uid="uid://dvnq65ldw82sj" path="res://Scenes/TitleScreen.tscn" id="2_vqoiw"]
 
-[node name="game" type="Node2D"]
+[node name="Game" type="Node2D"]
+script = ExtResource("1_top5a")
 
-[node name="Map" parent="." instance=ExtResource("1_h6oyr")]
+[node name="TitleScreen" parent="." instance=ExtResource("2_vqoiw")]

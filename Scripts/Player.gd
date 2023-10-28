@@ -1,33 +1,19 @@
 extends CharacterBody2D
 
-const SPEED = 200  # Adjust the player's speed as needed
-var velocity1 = Vector2()  # Player's current velocity
-
 enum Gender { FEMALE, MALE }
 
-#Load Nodes
 @onready var Name = $Name
 @onready var Selection = $Selection
 
+func rnd(): return RandomNumberGenerator.new().randf_range(-10.0, 10.0)
+
 var eat_sound = preload("res://Sounds/Chew.wav")
-
-var Trees = preload("res://Scripts/Tree.gd")
-var trees = Trees.new()
-
-var Berries = preload("res://Scripts/Bush.gd")
-var berries = Berries.new()
-
-var ui_list = []
-
-var rng = RandomNumberGenerator.new()
-func rnd():	return rng.randf_range(-10.0, 10.0)
 
 var gender
 var p_name
-
 var map_coordinates
 
-var age = 18 + randi() % 5 + randi() % 1 
+var age = 28 + rnd()
 var age_drain = 0.001
 
 var speed_max = 100.0 + rnd()
@@ -41,7 +27,6 @@ var hunger_max = 100.0 + rnd()
 var hunger_cur = hunger_max
 var hunger_drain = 0.005
 
-var energy_loss = false
 var energy_max = 100 + rnd()
 var energy_cur = energy_max
 var energy_drain = 0.05
@@ -52,33 +37,31 @@ var happy_drain = 0.01
 
 var luck = 101
 
-var is_moving = false
 var selected = false
+var is_moving = false
 var to_target = false
-
-var cur_target = Node2D
-var input_vector = Vector2()
-var target_position = Vector2(0, 0)
+var energy_loss = false
 
 var terrain = "grass"
 var water_modifier = 0.66
 var deep_water_modifier = 0.33
 
+var cur_target = Node2D
+var target_position = Vector2(0, 0)
+
 var direction = (target_position - position).normalized()
-	
-var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", "Willy"]
+
+var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", "Willy", "Steve"]
 var female_name_list = ["Darcy", "Regina", "Petunia", "Rose", "Tabitha", "Wendy", "Milly", "Winnifred"]
 
+
 func SetStructure(_s): pass
+
 
 func initiate(g):
 	gender = g
 	if gender == 0: p_name = female_name_list[randi() % female_name_list.size()]
 	else: p_name = male_name_list[randi() % male_name_list.size()]
-
-
-func _on_area_2d_area_entered(area_object):
-	if cur_target == area_object: print("HERE")
 
 
 func Death():
@@ -119,6 +102,7 @@ func Selected(boolean):
 
 
 func Eat(value):
+	if value == 0: return
 	$AudioStream2D.play()
 	if value == null: value = 0 # TODO: value coming up as null?
 	hunger_cur += value
@@ -174,7 +158,17 @@ func MoveToTarget(delta):
 func interact(player2):
 	pass
 	if gender == Gender.FEMALE && player2.gender == Gender.MALE:
-		var Player = preload("res://Scenes/MalePlayer.tscn")
+		var Player = preload("res://Scenes/Player.tscn")
 		var new_player = Player.instantiate()
 		new_player.position = Vector2(self.get_position().x , self.get_position().y)
 		call_deferred("add_sibling", new_player)
+
+
+func _on_area_2d_area_entered(area_object):
+	if cur_target == area_object: 
+		if area_object.get_parent().s_name == "Tree":
+			pass
+			
+		if area_object.get_parent().s_name == "Bush":
+			Eat(area_object.get_parent().PickBerry())
+	

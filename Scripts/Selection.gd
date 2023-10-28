@@ -41,19 +41,19 @@ func _input(event):
 	
 #	Start the selection process
 	if Input.is_action_just_pressed("Selecting"):
-		selection_start = event.position
-		selection_end = event.position
+		selection_start = get_global_mouse_position()
+		selection_end = get_global_mouse_position()
 		return
 	
 #	While holding down the select button
 	if Input.is_action_pressed("Selecting"): 
 		selecting = true
-		selection_end = event.position - selection_start
+		selection_end = get_global_mouse_position() - selection_start
 #		return
 		
 #	Let go of the select button, and select what's in the box
 	if Input.is_action_just_released("Selecting"):
-		if event.position - selection_start == Vector2(0, 0): SingleClickSelect()
+		if get_viewport().get_mouse_position() - selection_start == Vector2(0, 0): SingleClickSelect()
 		else: SelectGroup("Players")
 		selecting = false
 

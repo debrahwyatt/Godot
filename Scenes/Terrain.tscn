@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2pbu7pb0conf"]
+
+[ext_resource type="Script" path="res://Scripts/Terrain.gd" id="1_ekwyl"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_ekwyl")

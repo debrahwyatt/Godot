@@ -13,11 +13,12 @@ extends Control
 @onready var Age = $CanvasLayer/BottomBar/Age
 @onready var Sex = $CanvasLayer/BottomBar/Sex
 
+@onready var esc = $EscMenu
 
 var selected_list = []
 var top_player
 
-var players = preload("res://Scenes/MalePlayer.tscn").instantiate()
+var players = preload("res://Scenes/Player.tscn").instantiate()
 #var Player = preload("res://Scripts/Player.gd").new()
 
 var sex = ["Female", "Male"]
@@ -90,3 +91,19 @@ func UpdateUI(sl):
 		Luck.get_child(Stats.VALUE).text = str(int(selected_list[0].luck))
 		Happy.get_child(Stats.VALUE).text = str(int(selected_list[0].happy_cur))
 		Age.get_child(Stats.VALUE).text = str(int(selected_list[0].age))
+
+
+func _input(_event):
+	if Input.is_action_pressed("Esc"):
+		esc.visible = !esc.visible
+
+
+func _on_quit_button_down():
+	print("Quit Pressed")
+	get_parent().queue_free()
+#	get_parent().get_parent().visible = true
+
+
+func _on_resume_button_down():
+	esc.visible = false
+	print("Resume Pressed")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvnq65ldw82sj"]
+
+[ext_resource type="Script" path="res://Scripts/TitleScreen.gd" id="1_8scoo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_adiar"]
+line_spacing = 0.0
+font_size = 64
+
+[node name="TitleScreen" type="CanvasLayer"]
+script = ExtResource("1_8scoo")
+
+[node name="TitleScreen Camera" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Start" type="Button" parent="."]
+z_as_relative = false
+anchors_preset = -1
+anchor_left = 0.454
+anchor_top = 0.449
+anchor_right = 0.539
+anchor_bottom = 0.545
+offset_left = -0.680054
+offset_top = 0.0799561
+offset_right = 0.119873
+offset_bottom = 0.399963
+grow_horizontal = 2
+text = "Start"
+
+[node name="Quit" type="Button" parent="."]
+z_as_relative = false
+anchors_preset = -1
+anchor_left = 0.454
+anchor_top = 0.58
+anchor_right = 0.539
+anchor_bottom = 0.676
+offset_left = -0.680054
+offset_top = -0.400024
+offset_right = 0.119873
+offset_bottom = -0.0800781
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.135
+offset_right = -1.0
+offset_bottom = 0.199997
+grow_horizontal = 2
+grow_vertical = 2
+text = "Longfellows"
+label_settings = SubResource("LabelSettings_adiar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

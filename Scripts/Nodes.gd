@@ -1,6 +1,6 @@
 extends Control
 
-var water_saturation = 4
+var water_saturation = 8
 var water_percent = 0.3
 var tree_percent = 0.03
 var grass_percent = 0.06
@@ -18,7 +18,7 @@ var nodes = {
 		"name": "player",
 		"percent": player_percent,
 		"terrain": "grass",
-		"node": preload("res://Scenes/MalePlayer.tscn"),
+		"node": preload("res://Scenes/Player.tscn"),
 		"code": "P",
 	},
 
@@ -28,24 +28,24 @@ var nodes = {
 			"saturation": water_saturation,
 			"percent": water_percent,
 			"terrain": "",
-			"node": preload("res://Scenes/Water.tscn"),
+#			"node": preload("res://Scenes/Water.tscn"),
 			"color": water_colour,
-			"code": "W",
+#			"code": "W",
 		},
 		"deep_water": { 
 			"name": "deep_water",
 			"terrain": "water",
-			"node": preload("res://Scenes/DeepWater.tscn"),
+#			"node": preload("res://Scenes/DeepWater.tscn"),
 			"color": deep_water_colour,
-			"code": "DW",
+#			"code": "DW",
 		},
 		"grass": {
 			"name": "grass",
 			"percent": grass_percent,
 			"terrain": "",
-			"node": preload("res://Scenes/Grass.tscn"),
+#			"node": preload("res://Scenes/Grass.tscn"),
 			"color": grass_colour,
-			"code": "G",
+#			"code": "G",
 		},
 	},
 

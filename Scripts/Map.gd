@@ -1,20 +1,20 @@
 extends Node2D
 
 var map = []
-var rows = 42
-var cols = 77
+
+const map_multiplyer = 9
+var rows = 9 * map_multiplyer
+var cols = 16 * map_multiplyer
 var grid_size = 50.0
 
 var rng = RandomNumberGenerator.new()
 
 var nodes = preload("res://Scenes/Nodes.tscn").instantiate().nodes
-
-var grass = preload("res://Scenes/Grass.tscn").instantiate()
-var water = preload("res://Scenes/Water.tscn").instantiate()
-var deep_water = preload("res://Scenes/DeepWater.tscn").instantiate()
+#var nodes = preload("res://Scripts/Nodes.gd").new()
+var terrain = preload("res://Scripts/Terrain.gd").new()
 
 
-func GenerateWorld():
+func InitializeWorld():
 	for x in rows:
 		map.append([])
 		for y in cols:
@@ -27,30 +27,47 @@ func GenerateWorld():
 
 
 func _init():
-	GenerateWorld()
-	water.GenerateWater(map, nodes, rows, cols)
-	grass.GenerateGrass(map, nodes, rows, cols)
-	deep_water.GenerateDeepWater(map, nodes, rows, cols)
+	print("Initializing world...")
+	InitializeWorld()
 	
-	GeneratePlayers(nodes["player"])
-	GenerateObj(nodes["structure"]["tree"])
-	GenerateObj(nodes["structure"]["bush"])
+	print("Initializing water...")
+	terrain.InitializeWater(map, nodes, rows, cols)
+	
+	print("Initializing grass...")
+	terrain.InitializeGrass(map, nodes, rows, cols)
+	
+	print("Initializing deep water...")
+	terrain.InitializeDeepWater(map, nodes, rows, cols)
+	
+	print("Initializing players...")
+	InitializePlayers(nodes["player"])
+	
+	print("Initializing trees...")
+	InitializeObj(nodes["structure"]["tree"])
+
+	print("Initializing bushes...")
+	InitializeObj(nodes["structure"]["bush"])
 	
 #	GenerateObj(nodes["structure"]["big_bush"])
 #	GenerateLargeobj(nodes["structure"]["mountain"])
 
 
 func _ready():
+	print("Placing structures and terrain...")
 	for row in range(rows):
 		for col in range(cols):
 			if map[row][col]["structure"]["name"] == "player": 
 				PlacePlayer(row, col)
 				continue
-			if map[row][col]["terrain"]["name"] in ["water", "deep_water", "grass"]: PlaceTerrain(nodes["terrain"][map[row][col]["terrain"]["name"]], row, col)
-			if map[row][col]["structure"]["name"] != "": PlaceObj(nodes["structure"][map[row][col]["structure"]["name"]], row, col)
+			if map[row][col]["structure"]["name"] != "": 
+				PlaceObj(nodes["structure"][map[row][col]["structure"]["name"]], row, col)
+	
+	print("Setting up new camera...")
+	$MapCamera.make_current()
 
 
 func _draw():
+	print("Drawing map...")
 	for row in range(rows):
 		for col in range(cols):
 			var grid_colour
@@ -58,6 +75,8 @@ func _draw():
 			var y = row * grid_size
 			grid_colour = map[row][col]["terrain"]["color"]
 			draw_rect(Rect2(x, y, grid_size, grid_size), grid_colour)
+	
+	print("Loading complete.")
 
 
 func PlaceTerrain(obj, row, col):
@@ -72,7 +91,7 @@ func PlaceTerrain(obj, row, col):
 	add_child(new_obj)
 	
 
-func GenerateObj(obj):
+func InitializeObj(obj):
 	var count = obj["percent"] * cols * rows 
 	while count > 0:
 		var x = randi() % rows
@@ -82,14 +101,14 @@ func GenerateObj(obj):
 			count -= 1
 
 
-func GenerateLargeobj(obj):
+func InitializeLargeobj(obj):
 	var count = obj["percent"] * cols * rows 
 	while count > 0:
-		count += GenerateStructure(obj, randi() % rows, randi() % cols)
+		count += InitializeStructure(obj, randi() % rows, randi() % cols)
 		
 
 
-func GenerateStructure(obj, x, y):
+func InitializeStructure(obj, x, y):
 	if map[x][y]["terrain"]["name"] == obj["terrain"] && map[x][y]["structure"]["name"] == "": 
 		if \
 			x + obj["structure"].size() > rows || \
@@ -103,7 +122,7 @@ func GenerateStructure(obj, x, y):
 	return -1
 
 
-func GeneratePlayers(obj):
+func InitializePlayers(obj):
 	var count = obj["percent"] * cols * rows 
 	while count > 0:
 		var x = randi() % rows
@@ -130,7 +149,7 @@ func PlacePlayer(row, col):
 		new_player = preload("res://Scenes/FemalePlayer.tscn").instantiate()
 		new_player.initiate(0)
 	else: 
-		new_player = preload("res://Scenes/MalePlayer.tscn").instantiate()
+		new_player = preload("res://Scenes/Player.tscn").instantiate()
 		new_player.initiate(1)
 	
 	new_player.position = Vector2(grid_size * (float(col + 0.5)), grid_size * (float(row + 0.5)))

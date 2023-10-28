@@ -13,6 +13,7 @@ size = Vector2(64, 32)
 
 [node name="Bush" type="StaticBody2D"]
 position = Vector2(112, 64)
+scale = Vector2(1.25, 1.25)
 script = ExtResource("1_at2g6")
 
 [node name="Collision" type="CollisionShape2D" parent="."]

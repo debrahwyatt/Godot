@@ -13,7 +13,8 @@ func _on_area_entered(area):
 	if area.get_parent().is_in_group("Players"): area.get_parent().ChangeTerrain("deep_water")
 
 func _process(_delta):
-	label.text = structure
+	pass
+#	label.text = structure
 	
 
 func GenerateDeepWater(map, nodes, rows, cols):

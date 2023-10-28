@@ -5,6 +5,7 @@ extends StaticBody2D
 var berry_bush = preload("res://Scenes/Bush.tscn")
 
 var map_coordinates
+var s_name = "Tree"
 var targeted = false
 var chopping = false
 var chopping_progress = 200
