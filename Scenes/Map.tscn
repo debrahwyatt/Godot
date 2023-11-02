@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4tuf4ho16uha" path="res://Scenes/Selection.tscn" id="1_bb3sj"]
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_nef3h"]
 [ext_resource type="PackedScene" uid="uid://cafhvyq53aavb" path="res://Scenes/UI.tscn" id="3_a4w8a"]
-[ext_resource type="Script" path="res://Scripts/MapCamera.gd" id="4_p02ks"]
+[ext_resource type="PackedScene" uid="uid://cajocqdvmy8l3" path="res://Scenes/MapCamera.tscn" id="4_6gklo"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0hlvk"]
 
@@ -27,5 +27,4 @@ script = ExtResource("1_nef3h")
 
 [node name="UI" parent="." instance=ExtResource("3_a4w8a")]
 
-[node name="MapCamera" type="Camera2D" parent="."]
-script = ExtResource("4_p02ks")
+[node name="MapCamera" parent="." instance=ExtResource("4_6gklo")]

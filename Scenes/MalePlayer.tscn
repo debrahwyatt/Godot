@@ -174,14 +174,14 @@ visible = false
 position = Vector2(0, 0.5)
 texture = ExtResource("2_2dbk4")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." groups=["Targetable"]]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_4ck0i")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -33.5)
 
-[node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable"]]
+[node name="PlayerSelectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_082hf")
 disabled = true

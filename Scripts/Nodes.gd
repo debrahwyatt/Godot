@@ -1,7 +1,7 @@
 extends Control
 
 var water_saturation = 8
-var water_percent = 0.3
+var water_percent = 0.30
 var tree_percent = 0.03
 var grass_percent = 0.06
 var bush_percent = 0.0015

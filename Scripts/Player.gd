@@ -55,6 +55,7 @@ var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", 
 var female_name_list = ["Darcy", "Regina", "Petunia", "Rose", "Tabitha", "Wendy", "Milly", "Winnifred"]
 
 
+func Death(): queue_free()
 func SetStructure(_s): pass
 
 
@@ -64,10 +65,6 @@ func initiate(g):
 	else: p_name = male_name_list[randi() % male_name_list.size()]
 
 
-func Death():
-	queue_free()
-	
-	
 func _physics_process(_delta):
 	age += age_drain
 	
@@ -78,10 +75,10 @@ func _physics_process(_delta):
 
 
 func Drowning():
-		energy_cur -= energy_drain
-		if energy_cur < 0:
-			energy_cur = 0
-			health_cur -= health_drain
+	energy_cur -= energy_drain
+	if energy_cur < 0:
+		energy_cur = 0
+		health_cur -= health_drain
 
 
 func ChangeTerrain(new_terr):
@@ -165,10 +162,24 @@ func interact(player2):
 
 
 func _on_area_2d_area_entered(area_object):
+	print(area_object)
 	if cur_target == area_object: 
+		#Stop the player
+		to_target = false
+		is_moving = false
+		
+		print(cur_target)
+		if area_object.get_parent().s_name == "Player":
+			print("HERE")
+			interact(area_object)
+			
 		if area_object.get_parent().s_name == "Tree":
 			pass
 			
 		if area_object.get_parent().s_name == "Bush":
 			Eat(area_object.get_parent().PickBerry())
+	
+
+func Targeted(boolean):
+	Selection.visible = boolean
 	

@@ -23,7 +23,7 @@ disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Interatction" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
+[node name="BushInteraction" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
 shape = SubResource("RectangleShape2D_m6ef0")
 
 [node name="Selection" type="Sprite2D" parent="."]

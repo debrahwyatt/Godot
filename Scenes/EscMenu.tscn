@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxh2i58ti77gb"]
+
+[ext_resource type="Script" path="res://Scripts/EscMenu.gd" id="1_8qgot"]
+
+[node name="EscMenu" type="CanvasLayer"]
+script = ExtResource("1_8qgot")
+
+[node name="MenuBG" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.244
+anchor_right = 0.567
+anchor_bottom = 0.759
+offset_left = -1.20007
+offset_top = -3.54004
+offset_right = 1.20007
+offset_bottom = 0.299927
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Resume" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.244
+anchor_right = 0.567
+anchor_bottom = 0.273
+offset_left = 0.639954
+offset_top = 0.47998
+offset_right = -0.640015
+offset_bottom = 0.160004
+text = "Resume"
+
+[node name="Quit" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.281
+anchor_right = 0.567
+anchor_bottom = 0.311
+offset_left = 0.639954
+offset_top = 0.519989
+offset_right = -0.640015
+offset_bottom = -0.880005
+text = "Quit"
+
+[node name="Save" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.319
+anchor_right = 0.567
+anchor_bottom = 0.347
+offset_left = 0.640015
+offset_top = -0.52002
+offset_right = -0.640015
+offset_bottom = 0.23999
+text = "Save"
+
+[node name="Help" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.433
+anchor_top = 0.356
+anchor_right = 0.567
+anchor_bottom = 0.384
+offset_left = 0.639954
+offset_top = -0.480011
+offset_right = -0.640015
+offset_bottom = 0.279999
+text = "Help
+"
+
+[connection signal="button_down" from="Resume" to="." method="_on_resume_button_down"]
+[connection signal="button_down" from="Quit" to="." method="_on_quit_button_down"]
+[connection signal="button_down" from="Save" to="." method="_on_save_button_down"]
+[connection signal="button_down" from="Help" to="." method="_on_help_button_down"]

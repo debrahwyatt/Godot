@@ -2,16 +2,19 @@ extends Node2D
 
 var map = []
 
-const map_multiplyer = 9
+const map_multiplyer = 5
 var rows = 9 * map_multiplyer
 var cols = 16 * map_multiplyer
 var grid_size = 50.0
 
+var player_count = int(ceil(map_multiplyer / 2.0))
+
 var rng = RandomNumberGenerator.new()
 
-var nodes = preload("res://Scenes/Nodes.tscn").instantiate().nodes
-#var nodes = preload("res://Scripts/Nodes.gd").new()
+var nodes = preload("res://Scripts/Nodes.gd").new().nodes
 var terrain = preload("res://Scripts/Terrain.gd").new()
+
+var camera_position = Vector2(0, 0)
 
 
 func InitializeWorld():
@@ -21,8 +24,13 @@ func InitializeWorld():
 			map[x].append({
 				"x": x, 
 				"y": y,
-				"terrain" : {"name": "", "color": Color(0, 0, 0)},
-				"structure": {"name": ""},
+				"terrain" : {
+					"name": "", 
+					"color": Color(0, 0, 0)
+				},
+				"structure": {
+					"name": ""
+				},
 			})
 
 
@@ -39,14 +47,14 @@ func _init():
 	print("Initializing deep water...")
 	terrain.InitializeDeepWater(map, nodes, rows, cols)
 	
-	print("Initializing players...")
-	InitializePlayers(nodes["player"])
-	
 	print("Initializing trees...")
 	InitializeObj(nodes["structure"]["tree"])
 
 	print("Initializing bushes...")
 	InitializeObj(nodes["structure"]["bush"])
+	
+	print("Initializing players...")
+	InitializePlayers(nodes["player"])
 	
 #	GenerateObj(nodes["structure"]["big_bush"])
 #	GenerateLargeobj(nodes["structure"]["mountain"])
@@ -64,6 +72,7 @@ func _ready():
 	
 	print("Setting up new camera...")
 	$MapCamera.make_current()
+	$MapCamera.position = camera_position
 
 
 func _draw():
@@ -122,14 +131,32 @@ func InitializeStructure(obj, x, y):
 	return -1
 
 
-func InitializePlayers(obj):
-	var count = obj["percent"] * cols * rows 
-	while count > 0:
-		var x = randi() % rows
-		var y = randi() % cols
-		if map[x][y]["terrain"]["name"] == obj["terrain"] && map[x][y]["structure"]["name"] == "": 
-			map[x][y]["structure"] = obj
-			count -= 1
+func InitializePlayers(player):
+	var random_potential
+	var potential_list = []
+	
+	var x = randi() % rows; var y = randi() % cols
+	while map[x][y]["terrain"]["name"] != player["terrain"]: x = randi() % rows; y = randi() % cols
+	camera_position = Vector2(y * grid_size, x * grid_size)
+
+#	Create the first list of potential expansion squares
+	if x + 1 < rows: potential_list.append(map[x + 1][y])
+	if x - 1 >= 0: potential_list.append(map[x - 1][y])
+	if y + 1 < cols: potential_list.append(map[x][y + 1])
+	if y - 1 >= 0: potential_list.append(map[x][y - 1])
+	
+	while player_count > 0:
+		random_potential = potential_list[randi() % potential_list.size()]
+		
+		if random_potential["x"] + 1 < rows: potential_list.append(map[random_potential["x"] + 1][random_potential["y"]])
+		if random_potential["x"] - 1 >= 0: potential_list.append(map[random_potential["x"] - 1][random_potential["y"]])
+		if random_potential["y"] + 1 < cols: potential_list.append(map[random_potential["x"]][random_potential["y"] + 1])
+		if random_potential["y"] - 1 >= 0: potential_list.append(map[random_potential["x"]][random_potential["y"] - 1])
+		
+		random_potential["terrain"] = nodes["terrain"]["grass"]
+		if random_potential["structure"]["name"] == "":
+			random_potential["structure"]["name"] = "player"
+			player_count -= 1
 
 
 func PlaceObj(obj, row, col):

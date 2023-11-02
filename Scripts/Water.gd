@@ -16,7 +16,7 @@ func _process(_delta):
 	pass
 #	label.text = structure
 
-
+# if we extend the map on purpose, we can have more leeway with our if statements
 func GenerateWater(map, nodes, rows, cols):
 	var sum = 0
 	var potential_list = []
@@ -63,4 +63,3 @@ func GenerateWater(map, nodes, rows, cols):
 			if random_potential["x"] - 1 >= 0: potential_list.append(map[random_potential["x"] - 1][random_potential["y"]])
 			if random_potential["y"] + 1 < cols: potential_list.append(map[random_potential["x"]][random_potential["y"] + 1])
 			if random_potential["y"] - 1 >= 0: potential_list.append(map[random_potential["x"]][random_potential["y"] - 1])
-	return map

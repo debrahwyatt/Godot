@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cafhvyq53aavb"]
+[gd_scene load_steps=5 format=3 uid="uid://cafhvyq53aavb"]
 
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="1_61xjn"]
 [ext_resource type="Texture2D" uid="uid://d7rog8ecqo7l" path="res://Assets/Player/player.svg" id="2_0mcs1"]
 [ext_resource type="Texture2D" uid="uid://bow0neio3ily4" path="res://Assets/Player/female_player.svg" id="3_ky3on"]
+[ext_resource type="PackedScene" uid="uid://cxh2i58ti77gb" path="res://Scenes/EscMenu.tscn" id="4_dphds"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -21,6 +22,7 @@ grow_vertical = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TopBar" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
@@ -271,46 +273,4 @@ text = "100
 "
 horizontal_alignment = 1
 
-[node name="EscMenu" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="MenuBG" type="ColorRect" parent="EscMenu"]
-anchors_preset = -1
-anchor_left = 0.433
-anchor_top = 0.244
-anchor_right = 0.567
-anchor_bottom = 0.759
-offset_left = -1.20007
-offset_top = -3.54004
-offset_right = 1.20007
-offset_bottom = 0.299927
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Quit" type="Button" parent="EscMenu"]
-anchors_preset = -1
-anchor_left = 0.433
-anchor_top = 0.281
-anchor_right = 0.567
-anchor_bottom = 0.311
-offset_left = 0.639954
-offset_top = 0.519989
-offset_right = -0.640015
-offset_bottom = -0.880035
-text = "Quit"
-
-[node name="Resume" type="Button" parent="EscMenu"]
-anchors_preset = -1
-anchor_left = 0.433
-anchor_top = 0.244
-anchor_right = 0.567
-anchor_bottom = 0.273
-offset_left = 0.639954
-offset_top = 0.47998
-offset_right = -0.640015
-offset_bottom = 0.160004
-text = "Resume"
-
-[connection signal="button_down" from="EscMenu/Quit" to="." method="_on_quit_button_down"]
-[connection signal="button_down" from="EscMenu/Resume" to="." method="_on_resume_button_down"]
+[node name="EscMenu" parent="." instance=ExtResource("4_dphds")]

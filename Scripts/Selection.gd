@@ -59,8 +59,10 @@ func _input(event):
 
 
 func Target():
+	# Reinitialize targeting
 	for y in selected_list: y.cur_target = null
 	if target: target.Targeted(false)
+	
 	for x in get_tree().get_nodes_in_group("Targetable"):
 		if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
 			for y in selected_list: 

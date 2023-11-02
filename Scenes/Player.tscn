@@ -13,11 +13,11 @@ size = Vector2(38, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082hf"]
 size = Vector2(20, 74)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6i1s1"]
-radius = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
 radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i1s1"]
+radius = 1.0
 
 [sub_resource type="Animation" id="Animation_5pere"]
 resource_name = "Idle"
@@ -181,19 +181,19 @@ shape = SubResource("RectangleShape2D_4ck0i")
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -33.5)
 
-[node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable"]]
+[node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_082hf")
 disabled = true
-
-[node name="Terrain" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 33)
-shape = SubResource("CircleShape2D_6i1s1")
 
 [node name="Interaction" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 33.5)
 shape = SubResource("CircleShape2D_lgs1t")
 disabled = true
+
+[node name="Terrain" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 33)
+shape = SubResource("CircleShape2D_6i1s1")
 
 [node name="Name" type="RichTextLabel" parent="."]
 visible = false
