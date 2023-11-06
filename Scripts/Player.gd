@@ -7,10 +7,9 @@ enum Gender { FEMALE, MALE }
 
 func rnd(): return RandomNumberGenerator.new().randf_range(-10.0, 10.0)
 
-var eat_sound = preload("res://Sounds/Chew.wav")
-
 var gender
 var p_name
+
 var map_coordinates
 
 var age = 28 + rnd()
@@ -50,19 +49,62 @@ var cur_target = Node2D
 var target_position = Vector2(0, 0)
 
 var direction = (target_position - position).normalized()
+var structure = {
+	"name": "",
+	"object": null
+}
 
-var male_name_list = ["Dick", "Roger", "Peter", "Rodney", "Richard", "William", "Willy", "Steve"]
-var female_name_list = ["Darcy", "Regina", "Petunia", "Rose", "Tabitha", "Wendy", "Milly", "Winnifred"]
+var player = {
+	"name": "player",
+	"terrain": "grass",
+	"node": preload("res://Scenes/Player.tscn"),
+	"code": "P",
+}
+
+
+var male_name_list = [
+	"Dick", 
+	"Roger", 
+	"Peter", 
+	"Rodney", 
+	"Richard", 
+	"William", 
+	"Willy", 
+	"Steve",
+	"Wang",
+	"Frank",
+	"Francis",
+	"Bobby",
+	"Oscar",
+	"Angus"
+	]
+	
+var female_name_list = [
+	"Darcy", 
+	"Regina", 
+	"Petunia", 
+	"Rose", 
+	"Tabitha", 
+	"Wendy", 
+	"Milly", 
+	"Winnifred",
+	"Frankie",
+	"Bobbie",
+	"Mildred",
+	"Hagatha",
+	"Agnus"
+	]
+	
+var last_name_list = male_name_list + female_name_list
 
 
 func Death(): queue_free()
-func SetStructure(_s): pass
 
 
 func initiate(g):
 	gender = g
-	if gender == 0: p_name = female_name_list[randi() % female_name_list.size()]
-	else: p_name = male_name_list[randi() % male_name_list.size()]
+	if gender == 0: p_name = female_name_list[randi() % female_name_list.size()] + " " + last_name_list[randi() % last_name_list.size()]
+	else: p_name = male_name_list[randi() % male_name_list.size()] + " " + last_name_list[randi() % last_name_list.size()]
 
 
 func _physics_process(_delta):
@@ -99,14 +141,20 @@ func Selected(boolean):
 
 
 func Eat(value):
-	if value == 0: return
+	if value == null || value == 0: return
 	$AudioStream2D.play()
-	if value == null: value = 0 # TODO: value coming up as null?
+	
 	hunger_cur += value
-	if hunger_cur > 100: hunger_cur = hunger_max
+	if hunger_cur > hunger_max: hunger_cur = hunger_max
+	
+	happy_cur += value / 3
+	if happy_cur > happy_max: happy_cur = happy_max
 
 
 func _input(_event):
+	if Input.is_action_pressed("Keyboard Action") and selected:
+		if structure["name"] == "Bush": Eat(structure["object"].PickBerry())
+	
 	if Input.is_action_pressed("Moving") and selected:
 		target_position = get_global_mouse_position()
 		direction = (target_position - position).normalized()
@@ -153,7 +201,6 @@ func MoveToTarget(delta):
 
 
 func interact(player2):
-	pass
 	if gender == Gender.FEMALE && player2.gender == Gender.MALE:
 		var Player = preload("res://Scenes/Player.tscn")
 		var new_player = Player.instantiate()
@@ -162,15 +209,16 @@ func interact(player2):
 
 
 func _on_area_2d_area_entered(area_object):
-	print(area_object)
+	if area_object.get_parent().s_name == "Bush":
+		structure["name"] = "Bush"
+		structure["object"] = area_object.get_parent()
+		
 	if cur_target == area_object: 
 		#Stop the player
 		to_target = false
 		is_moving = false
 		
-		print(cur_target)
 		if area_object.get_parent().s_name == "Player":
-			print("HERE")
 			interact(area_object)
 			
 		if area_object.get_parent().s_name == "Tree":
@@ -182,4 +230,9 @@ func _on_area_2d_area_entered(area_object):
 
 func Targeted(boolean):
 	Selection.visible = boolean
-	
+
+
+func _on_area_2d_area_exited(area_object):
+	if area_object.get_parent() == structure["object"]:
+		structure["name"] = ""
+		structure["object"] = null

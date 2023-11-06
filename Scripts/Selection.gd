@@ -53,13 +53,14 @@ func _input(event):
 		
 #	Let go of the select button, and select what's in the box
 	if Input.is_action_just_released("Selecting"):
-		if get_viewport().get_mouse_position() - selection_start == Vector2(0, 0): SingleClickSelect()
+		if get_global_mouse_position() - selection_start == Vector2(0, 0): SingleClickSelect()
 		else: SelectGroup("Players")
 		selecting = false
 
 
 func Target():
 	# Reinitialize targeting
+	if !selected_list[0].is_in_group("Players"): return
 	for y in selected_list: y.cur_target = null
 	if target: target.Targeted(false)
 	
@@ -72,17 +73,21 @@ func Target():
 
 
 func SingleClickSelect():
+	for item in selected_list: item.Selected(false)
+	
 	for x in get_tree().get_nodes_in_group("Selectable"):
 		if Rect2(x.global_position - x.shape.extents * 1.5, x.shape.extents * 3).abs().has_point(get_global_mouse_position()):
 			var child = x.get_parent().get_parent()
-			
 			if child.name == "level": child = x.get_parent()
-			for item in selected_list: item.Selected(false)
 			
 			child.Selected(true)
 			selected_list = [child]
-			UI.UpdateUI(selected_list)
-
+			if child.is_in_group("Players") : UI.UpdateUI(selected_list)
+			return
+	
+	selected_list = []
+	UI.UpdateUI(selected_list)
+	
 
 func SelectGroup(group):
 	

@@ -3,16 +3,49 @@ extends Node
 var map_coordinates
 var structure = ""
 
+var water_percent = 0.71
+var grass_percent = 0.06
 
-func InitializeGrass(map, nodes, rows, cols):
+var water_colour = Color(0, 0.5, 1)  # Water blue
+var grass_colour = Color(0, 0.5, 0.1)  # Dark grass green
+var deep_water_colour = Color(0, 0.4, 0.9)  # Deep Water blue
+
+var terrain = {
+	"water": { 
+		"name": "water",
+		"percent": water_percent,
+		"terrain": "",
+		"color": water_colour,
+	},
+	"deep_water": { 
+		"name": "deep_water",
+		"terrain": "water",
+		"color": deep_water_colour,
+	},
+	"grass": {
+		"name": "grass",
+		"percent": grass_percent,
+		"terrain": "",
+		"color": grass_colour,
+	},
+}
+
+
+func InitializeGrass(map):
+	var rows = map.size()
+	var cols = map[0].size()
+	
 	for x in rows:
 		for y in cols:
 			if map[x][y]["terrain"]["name"] == "": 
-				map[x][y]["terrain"] = nodes["terrain"]["grass"]
+				map[x][y]["terrain"] = terrain["grass"]
 
 
-func InitializeDeepWater(map, nodes, rows, cols):
+func InitializeDeepWater(map):
+	var rows = map.size()
+	var cols = map[0].size()
 	var water_types = ["water", "deep_water"]
+	
 	for x in rows:
 		for y in cols:
 			if map[x][y]["terrain"]["name"] == "water":
@@ -28,33 +61,37 @@ func InitializeDeepWater(map, nodes, rows, cols):
 					if (map[x + 1][y + 1]["terrain"]["name"] not in water_types): continue
 					if (map[x + 1][y - 1]["terrain"]["name"] not in water_types): continue
 
-				map[x][y]["terrain"] = nodes["terrain"]["deep_water"]
+				map[x][y]["terrain"] = terrain["deep_water"]
 
 
-func InitializeWater(map, nodes, rows, cols):
+func InitializeWater(map):
 	var sum = 0
-	var potential_list = []
+	var rows = map.size()
+	var cols = map[0].size()
+	var saturation = rows / 9
+
 	var water_features = []
-	var total_water = nodes["terrain"]["water"]["percent"] * cols * rows
+	var total_water = terrain["water"]["percent"] * cols * rows
 	
 #	Determine water starting positions
 	while sum < total_water:
-		var pool_size = randi() % int(total_water/nodes["terrain"]["water"]["saturation"])
+		var pool_size = randi() % int(total_water/saturation)
 		water_features.append(pool_size)
 		sum += pool_size
-	print("Water features count: ", water_features.size(), ", Sum: ", sum)
-	
+#	print("Water features count: ", water_features.size(), ", Sum: ", sum)
+
 #	Select the first drop for the pool
-	var k = 1
+	var _k = 1
 	for feature_size in water_features:
-		print("Building feature: ", k, ". Feature size: ", feature_size); k += 1
+#		print("Building feature: ", _k, ". Feature size: ", feature_size); _k += 1
+		
+		var potential_list = []
 		
 		#Find a random map coordinate that isn't already water
 		var x = randi() % rows; var y = randi() % cols
-#		while map[x][y]["node"]["name"] != nodes["water"]["terrain"]: x = randi() % rows; y = randi() % cols
-		while map[x][y]["terrain"]["name"] != nodes["terrain"]["water"]["terrain"]: x = randi() % rows; y = randi() % cols
+		while map[x][y]["terrain"]["name"] != terrain["water"]["terrain"]: x = randi() % rows; y = randi() % cols
 		
-		map[x][y]["terrain"] = nodes["terrain"]["water"]
+		map[x][y]["terrain"] = terrain["water"]
 		
 #		Create the first list of potential expansion squares
 		if x + 1 < rows: 
@@ -72,24 +109,22 @@ func InitializeWater(map, nodes, rows, cols):
 		
 #		Select the next available squares and loop it
 		for i in range(feature_size):
-			var index = randi() % potential_list.size()
-			var random_potential = potential_list[index]
-
+			if potential_list.size() <= 0: break
+			var random_potential = potential_list[randi() % potential_list.size()]
+			
 			#Erase any entry that is already water from our potential
 			while true:
 #				select a random size for the pool up to a maximum
 				if random_potential["terrain"]["name"] == "water": 
-					potential_list.erase(index)
-					index = randi() % potential_list.size()
-					random_potential = potential_list[index]
+					potential_list.erase(random_potential)
+					
+					if potential_list.size() <= 0: break
+					
+					random_potential = potential_list[randi() % potential_list.size()]
 					continue
 				break
-
-
-#			if random_potential["terrain"]["name"] == "water":
-#				potential_list.erase(index)
-#				i -= 1
-#				continue
+			
+			if potential_list.size() <= 0: break
 			
 			if random_potential["x"] + 1 < rows: 
 				if map[random_potential["x"] + 1][random_potential["y"]]["terrain"]["name"] != "water":
@@ -104,15 +139,15 @@ func InitializeWater(map, nodes, rows, cols):
 				if map[random_potential["x"]][random_potential["y"] - 1]["terrain"]["name"] != "water":
 					potential_list.append(map[random_potential["x"]][random_potential["y"] - 1])
 	
-			random_potential["terrain"] = nodes["terrain"]["water"]
-		potential_list = []
-	print("Water added...")
-	var l = 0
+			random_potential["terrain"] = terrain["water"]
+	
+#	print("Water added...")
+	
+	var _l = 0
 	for x in map:
 		for y in x:
 			if y["terrain"]["name"] == "water":
-				l += 1
-	print(l)
-	print("sum/l = ", l * 1.0 / sum)
-
-
+				_l += 1
+#	print(l)
+#	print("sum / l = ", l * 1.0 / sum)
+#	print("sum / total = ", sum * 1.0 / (map.size() * map[0].size()))

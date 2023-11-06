@@ -37,3 +37,4 @@ func PickBerry():
 		if b.visible == true:
 			b.picked()
 			return b.value
+	return 0

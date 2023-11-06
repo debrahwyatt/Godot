@@ -1,6 +1,10 @@
 extends CanvasLayer
 @onready var tsc = $"TitleScreen Camera"
 
+func _ready():
+	$Music.play()
+	
+
 func _on_quit_pressed():
 	get_tree().quit()
 

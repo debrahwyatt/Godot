@@ -5,3 +5,28 @@
 [node name="MapCamera" type="Camera2D"]
 position = Vector2(960, 540)
 script = ExtResource("1_e872l")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+visible = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1500, 500)
+render_target_update_mode = 0

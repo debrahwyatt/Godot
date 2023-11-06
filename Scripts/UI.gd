@@ -58,6 +58,7 @@ func MakeStatsVisible(boolean):
 		if top_player.gender == 0: FemalePlayer.visible = boolean
 		else: Player.visible = boolean
 	
+	$CanvasLayer/BottomBar.visible = boolean
 	Name.visible = boolean
 	StatVisible(Health, boolean)
 	StatVisible(Energy, boolean)
@@ -91,6 +92,4 @@ func UpdateUI(sl):
 		Luck.get_child(Stats.VALUE).text = str(int(selected_list[0].luck))
 		Happy.get_child(Stats.VALUE).text = str(int(selected_list[0].happy_cur))
 		Age.get_child(Stats.VALUE).text = str(int(selected_list[0].age))
-
-
 

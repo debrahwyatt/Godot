@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://g1xa4wh5qodi"]
+[gd_scene load_steps=8 format=3 uid="uid://g1xa4wh5qodi"]
 
 [ext_resource type="PackedScene" uid="uid://c4tuf4ho16uha" path="res://Scenes/Selection.tscn" id="1_bb3sj"]
 [ext_resource type="Script" path="res://Scripts/Map.gd" id="1_nef3h"]
 [ext_resource type="PackedScene" uid="uid://cafhvyq53aavb" path="res://Scenes/UI.tscn" id="3_a4w8a"]
 [ext_resource type="PackedScene" uid="uid://cajocqdvmy8l3" path="res://Scenes/MapCamera.tscn" id="4_6gklo"]
+[ext_resource type="AudioStream" uid="uid://dlab54mr3aqac" path="res://Assets/Music/The Calling  - Angelwing.mp3" id="5_jbtgn"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0hlvk"]
 
@@ -27,4 +28,8 @@ script = ExtResource("1_nef3h")
 
 [node name="UI" parent="." instance=ExtResource("3_a4w8a")]
 
+[node name="Music" type="AudioStreamPlayer2D" parent="UI"]
+stream = ExtResource("5_jbtgn")
+
 [node name="MapCamera" parent="." instance=ExtResource("4_6gklo")]
+y_sort_enabled = true
