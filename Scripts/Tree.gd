@@ -5,6 +5,7 @@ extends StaticBody2D
 var berry_bush = preload("res://Scenes/Bush.tscn")
 
 var map_coordinates
+
 var s_name = "Tree"
 var targeted = false
 var chopping = false
@@ -12,12 +13,17 @@ var chopping_progress = 200
 
 var player_list = []
 
+func Chopping(boolean):
+	chopping = boolean
+
 
 func _on_area_2d_area_entered(area):
 	var parent = area.get_parent()
 	if parent.is_in_group("Players"):
 		player_list.append(parent)
-		if parent.cur_target == self: chopping = true
+		if parent.cur_target == self: 
+			print("HERE4")
+			chopping = true
 
 
 func _on_area_2d_area_exited(area):
@@ -27,15 +33,15 @@ func _on_area_2d_area_exited(area):
 		chopping = false
 
 
-#func _process(_delta): 
-#	if chopping == true: chopping_progress -= 1
-#	if chopping_progress == 0:
-#		chopping = false
-#		var TreeInstance = berry_bush.instantiate()
-#		TreeInstance.position = Vector2(self.position[0], self.position[1])
-#		TreeInstance.map_coordinates = [map_coordinates[0], map_coordinates[1]]
-#		add_sibling(TreeInstance)
-#		queue_free()
+func _process(_delta): 
+	if chopping == true: chopping_progress -= 1
+	if chopping_progress == 0:
+		chopping = false
+		var TreeInstance = berry_bush.instantiate()
+		TreeInstance.position = Vector2(self.position[0], self.position[1])
+		TreeInstance.map_coordinates = [map_coordinates[0], map_coordinates[1]]
+		add_sibling(TreeInstance)
+		queue_free()
 
 
 func _input(_event): pass

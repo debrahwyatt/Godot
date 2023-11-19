@@ -28,8 +28,10 @@ script = ExtResource("1_nef3h")
 
 [node name="UI" parent="." instance=ExtResource("3_a4w8a")]
 
-[node name="Music" type="AudioStreamPlayer2D" parent="UI"]
-stream = ExtResource("5_jbtgn")
-
 [node name="MapCamera" parent="." instance=ExtResource("4_6gklo")]
 y_sort_enabled = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_jbtgn")
+volume_db = -4.0
+max_distance = 1e+09

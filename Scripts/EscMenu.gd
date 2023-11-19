@@ -31,4 +31,3 @@ func _on_title_screen_button_down():
 	var TitleScreen = get_parent().get_parent().get_parent().get_children()[0]
 	TitleScreen.visible = true
 	get_parent().get_parent().queue_free()
-	pass # Replace with function body.

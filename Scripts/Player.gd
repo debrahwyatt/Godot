@@ -15,7 +15,7 @@ var map_coordinates
 var age = 28 + rnd()
 var age_drain = 0.001
 
-var speed_max = 100.0 + rnd()
+var speed_max = 150.0 + rnd() * 1.5
 var speed_cur = speed_max
 
 var health_max = 100.0 + rnd()
@@ -57,7 +57,7 @@ var structure = {
 var player = {
 	"name": "player",
 	"terrain": "grass",
-	"node": preload("res://Scenes/Player.tscn"),
+	"node": preload("res://Scenes/MalePlayer.tscn"),
 	"code": "P",
 }
 
@@ -108,7 +108,10 @@ func initiate(g):
 
 
 func _physics_process(_delta):
-	age += age_drain
+	age += age_drain + 0.1
+	if age >= 60.0 && gender == 0: 
+		$Sprite2/FemaleBody.visible = false
+		$Sprite2/OldFemaleBody.visible = true
 	
 	if health_cur <= 0: Death()
 	if energy_loss == true: Drowning()
@@ -202,13 +205,14 @@ func MoveToTarget(delta):
 
 func interact(player2):
 	if gender == Gender.FEMALE && player2.gender == Gender.MALE:
-		var Player = preload("res://Scenes/Player.tscn")
+		var Player = preload("res://Scenes/MalePlayer.tscn")
 		var new_player = Player.instantiate()
 		new_player.position = Vector2(self.get_position().x , self.get_position().y)
 		call_deferred("add_sibling", new_player)
 
 
 func _on_area_2d_area_entered(area_object):
+	print(area_object)
 	if area_object.get_parent().s_name == "Bush":
 		structure["name"] = "Bush"
 		structure["object"] = area_object.get_parent()
@@ -222,6 +226,8 @@ func _on_area_2d_area_entered(area_object):
 			interact(area_object)
 			
 		if area_object.get_parent().s_name == "Tree":
+			area_object.get_parent().Chopping(true)
+			print("HERE3")
 			pass
 			
 		if area_object.get_parent().s_name == "Bush":
@@ -233,6 +239,12 @@ func Targeted(boolean):
 
 
 func _on_area_2d_area_exited(area_object):
+#	print(area_object)
 	if area_object.get_parent() == structure["object"]:
 		structure["name"] = ""
 		structure["object"] = null
+
+
+func _on_area_2d_2_area_entered(_area):
+	print("HERE")
+	pass # Replace with function body.

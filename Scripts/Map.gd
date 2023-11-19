@@ -1,6 +1,7 @@
 extends Node2D
 
 var map = []
+var Music = false
 
 const map_multiplyer = 10
 var rows = 9 * map_multiplyer
@@ -36,6 +37,7 @@ func InitializeWorld():
 
 
 func _init():
+	
 	print("Initializing world...")
 	InitializeWorld()
 	
@@ -62,8 +64,7 @@ func _init():
 
 
 func _ready():
-	$UI/Music.play()
-	
+	$Music.playing = Music
 	print("Placing structures and terrain...")
 	for row in range(rows):
 		for col in range(cols):
@@ -76,8 +77,6 @@ func _ready():
 	print("Setting up map camera...")
 	$MapCamera.position = camera_position
 	$MapCamera.make_current()
-	
-
 
 
 func _draw():
@@ -181,7 +180,7 @@ func PlacePlayer(row, col):
 		new_player = preload("res://Scenes/FemalePlayer.tscn").instantiate()
 		new_player.initiate(0)
 	else: 
-		new_player = preload("res://Scenes/Player.tscn").instantiate()
+		new_player = preload("res://Scenes/MalePlayer.tscn").instantiate()
 		new_player.initiate(1)
 	
 	new_player.position = Vector2(grid_size * (float(col + 0.5)), grid_size * (float(row + 0.5)))

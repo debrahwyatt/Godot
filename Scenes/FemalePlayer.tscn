@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://buuf27te003dh"]
+[gd_scene load_steps=18 format=3 uid="uid://buuf27te003dh"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0knyc"]
 [ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_mj4ic"]
+[ext_resource type="Texture2D" uid="uid://dyuc2d0jlbxve" path="res://Assets/Player/OldFemaleBody.png" id="3_hlsry"]
 [ext_resource type="Texture2D" uid="uid://c5bryj2es73t0" path="res://Assets/Player/eyes.png" id="4_dpwxc"]
 [ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_vxyk0"]
 [ext_resource type="Texture2D" uid="uid://c6hpbv7dctuph" path="res://Assets/Player/FemaleBody.png" id="6_yt2a7"]
@@ -11,7 +12,7 @@
 size = Vector2(34, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082hf"]
-size = Vector2(20, 66)
+size = Vector2(24, 72)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
 radius = 48.0
@@ -182,7 +183,7 @@ shape = SubResource("RectangleShape2D_4ck0i")
 position = Vector2(0, -33.5)
 
 [node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
-position = Vector2(0, 7.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_082hf")
 disabled = true
 
@@ -213,6 +214,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2" type="Node2D" parent="."]
 scale = Vector2(1.1, 1.1)
+
+[node name="OldFemaleBody" type="Sprite2D" parent="Sprite2"]
+visible = false
+position = Vector2(1.49012e-07, -27.7273)
+scale = Vector2(0.962567, 0.956113)
+texture = ExtResource("3_hlsry")
 
 [node name="FemaleBody" type="Sprite2D" parent="Sprite2"]
 position = Vector2(0, -28)

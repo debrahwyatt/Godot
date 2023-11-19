@@ -7,7 +7,7 @@ var value = 50 + randi() % 10
 
 
 func picked():
-	timer.start(30)
+	timer.start(value)
 	set_visible(false)
 	return value
 

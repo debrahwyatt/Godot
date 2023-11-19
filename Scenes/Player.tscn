@@ -1,20 +1,21 @@
-[gd_scene load_steps=17 format=3 uid="uid://44m17do0518x"]
+[gd_scene load_steps=18 format=3 uid="uid://44m17do0518x"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q0yir"]
 [ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_2dbk4"]
+[ext_resource type="Script" path="res://Scripts/Test.gd" id="2_87g67"]
 [ext_resource type="Texture2D" uid="uid://dofs5sorxdc72" path="res://Assets/Player/body.png" id="3_7kj1x"]
 [ext_resource type="Texture2D" uid="uid://c5bryj2es73t0" path="res://Assets/Player/eyes.png" id="4_moywf"]
 [ext_resource type="Texture2D" uid="uid://bvx6csu4o535u" path="res://Assets/Player/foot.png" id="5_xiyo4"]
 [ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_rh2o7"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
+radius = 50.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
 size = Vector2(38, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_082hf"]
-size = Vector2(20, 74)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
-radius = 50.0
+size = Vector2(22, 75)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6i1s1"]
 radius = 1.0
@@ -169,6 +170,13 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
 script = ExtResource("1_q0yir")
 
+[node name="Area2D2" type="Area2D" parent="."]
+script = ExtResource("2_87g67")
+
+[node name="Interaction2" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_lgs1t")
+disabled = true
+
 [node name="Selection" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, 0.5)
@@ -182,7 +190,7 @@ shape = SubResource("RectangleShape2D_4ck0i")
 position = Vector2(0, -33.5)
 
 [node name="Selectable" type="CollisionShape2D" parent="Area2D" groups=["Selectable", "Targetable"]]
-position = Vector2(0, 3.5)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_082hf")
 disabled = true
 

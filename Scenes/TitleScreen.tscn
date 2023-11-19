@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvnq65ldw82sj"]
+[gd_scene load_steps=8 format=3 uid="uid://dvnq65ldw82sj"]
 
 [ext_resource type="Script" path="res://Scripts/TitleScreen.gd" id="1_8scoo"]
-[ext_resource type="Texture2D" uid="uid://c6hpbv7dctuph" path="res://Assets/Player/FemaleBody.png" id="2_4la4o"]
 [ext_resource type="FontFile" uid="uid://jykks3bol6g8" path="res://Assets/Fonts/BLKCHCRY.TTF" id="2_e0sgk"]
 [ext_resource type="Texture2D" uid="uid://d7rog8ecqo7l" path="res://Assets/Player/player.svg" id="3_kts33"]
 [ext_resource type="AudioStream" uid="uid://c6j4vyvu7gnqc" path="res://Assets/Music/Angelwing - Tears of Joy-No Vocal.wav" id="5_82fkk"]
+[ext_resource type="Texture2D" uid="uid://bow0neio3ily4" path="res://Assets/Player/female_player.svg" id="5_a2mg2"]
+[ext_resource type="Texture2D" uid="uid://bflc1ckd355x7" path="res://Assets/Player/old_female_player.svg" id="6_klp8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adiar"]
 line_spacing = 0.0
@@ -26,71 +27,127 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.211765, 0.545098, 0.380392, 1)
 
-[node name="Container" type="Control" parent="."]
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_82fkk")
+autoplay = true
+
+[node name="Node2D" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.667
-anchor_top = 0.593
-anchor_right = 0.9
-anchor_bottom = 0.948
-offset_left = -1280.64
-offset_top = -640.44
-offset_right = 192.0
-offset_bottom = 64.1599
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 624.0
+offset_right = 256.0
+offset_bottom = 624.0
 
-[node name="FemaleBody" type="Sprite2D" parent="Container"]
-position = Vector2(1616, 824)
-scale = Vector2(5, 5)
-texture = ExtResource("2_4la4o")
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Player" type="Sprite2D" parent="Container"]
+[node name="Container" type="Control" parent="Control"]
+layout_mode = 1
+offset_left = -8.0
+offset_right = -8.0
+
+[node name="FemalePlayer" type="Sprite2D" parent="Control/Container"]
+position = Vector2(1632, 816)
+scale = Vector2(4.85, 4.85)
+texture = ExtResource("5_a2mg2")
+
+[node name="Player" type="Sprite2D" parent="Control/Container"]
 position = Vector2(1411, 812)
 scale = Vector2(5, 5)
 texture = ExtResource("3_kts33")
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = -1
+[node name="OldFemalePlayer" type="Sprite2D" parent="Control/Container"]
+position = Vector2(1192, 816)
+scale = Vector2(4.75, 4.75)
+texture = ExtResource("6_klp8y")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 2
 anchor_right = 1.0
-anchor_bottom = 0.135
-offset_right = -1.0
-offset_bottom = 492.2
-grow_horizontal = 2
-grow_vertical = 2
-text = "Longfellows"
+anchor_bottom = 0.338
+offset_left = -8.0
+offset_bottom = 8.25598
+text = "Richards"
 label_settings = SubResource("LabelSettings_adiar")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="Control"]
 z_as_relative = false
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.128
-anchor_top = 0.615
-anchor_right = 0.536
-anchor_bottom = 0.744
-offset_left = 0.23999
-offset_top = -0.200012
-offset_right = 0.880005
-offset_bottom = 0.47998
-grow_horizontal = 2
+anchor_left = 0.13
+anchor_top = 0.588
+anchor_right = 0.331
+anchor_bottom = 0.654
+offset_left = -0.560013
+offset_top = 0.255981
+offset_right = -0.87207
+offset_bottom = -7.55206
 text = "Start"
 
-[node name="Quit" type="Button" parent="."]
+[node name="Settings" type="Button" parent="Control"]
 z_as_relative = false
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.128
-anchor_top = 0.779
-anchor_right = 0.534
-anchor_bottom = 0.915
-offset_left = 0.23999
-offset_top = -0.320068
-offset_right = 0.719971
-offset_bottom = -0.200012
-grow_horizontal = 2
-grow_vertical = 0
+anchor_left = 0.13
+anchor_top = 0.706
+anchor_right = 0.331
+anchor_bottom = 0.765
+offset_left = -0.560013
+offset_top = -0.128052
+offset_right = -0.87207
+offset_bottom = -0.320068
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Control"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13
+anchor_top = 0.824
+anchor_right = 0.331
+anchor_bottom = 0.881
+offset_left = -0.560013
+offset_top = -0.512085
+offset_right = -0.87207
+offset_bottom = 0.471924
 text = "Quit"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_82fkk")
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[node name="BackButton" type="Button" parent="Control2"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 120.0
+text = "Back"
+
+[node name="CheckButton" type="CheckButton" parent="Control2"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 256.0
+button_pressed = true
+text = "Music"
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="toggled" from="Control2/CheckButton" to="." method="_on_check_button_toggled"]
