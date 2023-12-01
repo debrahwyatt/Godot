@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvnq65ldw82sj"]
+[gd_scene load_steps=9 format=3 uid="uid://dvnq65ldw82sj"]
 
 [ext_resource type="Script" path="res://Scripts/TitleScreen.gd" id="1_8scoo"]
 [ext_resource type="FontFile" uid="uid://jykks3bol6g8" path="res://Assets/Fonts/BLKCHCRY.TTF" id="2_e0sgk"]
+[ext_resource type="AudioStream" uid="uid://c6j4vyvu7gnqc" path="res://Music/Angelwing - Tears of Joy-No Vocal.wav" id="2_jx6ay"]
 [ext_resource type="Texture2D" uid="uid://d7rog8ecqo7l" path="res://Assets/Player/player.svg" id="3_kts33"]
-[ext_resource type="AudioStream" uid="uid://c6j4vyvu7gnqc" path="res://Assets/Music/Angelwing - Tears of Joy-No Vocal.wav" id="5_82fkk"]
 [ext_resource type="Texture2D" uid="uid://bow0neio3ily4" path="res://Assets/Player/female_player.svg" id="5_a2mg2"]
+[ext_resource type="Texture2D" uid="uid://c42c7wc7bwr24" path="res://Assets/Player/old_male_player.svg" id="6_dm416"]
 [ext_resource type="Texture2D" uid="uid://bflc1ckd355x7" path="res://Assets/Player/old_female_player.svg" id="6_klp8y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adiar"]
@@ -15,6 +16,10 @@ font_color = Color(0.870588, 0.870588, 0.870588, 1)
 
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_8scoo")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_jx6ay")
+autoplay = true
 
 [node name="TitleScreen Camera" type="Camera2D" parent="."]
 position = Vector2(960, 543)
@@ -27,10 +32,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.211765, 0.545098, 0.380392, 1)
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_82fkk")
-autoplay = true
-
 [node name="Node2D" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -40,7 +41,6 @@ offset_right = 256.0
 offset_bottom = 624.0
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,23 +52,29 @@ grow_vertical = 2
 
 [node name="Container" type="Control" parent="Control"]
 layout_mode = 1
+anchors_preset = 0
 offset_left = -8.0
 offset_right = -8.0
 
 [node name="FemalePlayer" type="Sprite2D" parent="Control/Container"]
-position = Vector2(1632, 816)
+position = Vector2(1552, 816)
 scale = Vector2(4.85, 4.85)
 texture = ExtResource("5_a2mg2")
 
 [node name="Player" type="Sprite2D" parent="Control/Container"]
-position = Vector2(1411, 812)
+position = Vector2(936, 812)
 scale = Vector2(5, 5)
 texture = ExtResource("3_kts33")
 
 [node name="OldFemalePlayer" type="Sprite2D" parent="Control/Container"]
-position = Vector2(1192, 816)
+position = Vector2(1376, 816)
 scale = Vector2(4.75, 4.75)
 texture = ExtResource("6_klp8y")
+
+[node name="OldMalePlayer" type="Sprite2D" parent="Control/Container"]
+position = Vector2(1176, 814)
+scale = Vector2(4.95, 4.95)
+texture = ExtResource("6_dm416")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 2
@@ -76,7 +82,7 @@ anchor_right = 1.0
 anchor_bottom = 0.338
 offset_left = -8.0
 offset_bottom = 8.25598
-text = "Richards"
+text = "Longfellows"
 label_settings = SubResource("LabelSettings_adiar")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -124,6 +130,7 @@ offset_bottom = 0.471924
 text = "Quit"
 
 [node name="Control2" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -137,7 +144,7 @@ offset_right = 256.0
 offset_bottom = 120.0
 text = "Back"
 
-[node name="CheckButton" type="CheckButton" parent="Control2"]
+[node name="Mute" type="CheckButton" parent="Control2"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 192.0
@@ -150,4 +157,4 @@ text = "Music"
 [connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Control2/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="toggled" from="Control2/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="Control2/Mute" to="." method="_on_check_button_toggled"]

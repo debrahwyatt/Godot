@@ -3,12 +3,12 @@ extends Node2D
 var map = []
 var Music = false
 
-const map_multiplyer = 10
-var rows = 9 * map_multiplyer
-var cols = 16 * map_multiplyer
+var map_multiplier = 10
+var rows = 9 * map_multiplier
+var cols = 16 * map_multiplier
 var grid_size = 50.0
 
-var player_count = int(ceil(map_multiplyer / 2.0))
+var player_count = int(ceil(map_multiplier / 2.0))
 
 var rng = RandomNumberGenerator.new()
 
@@ -36,7 +36,15 @@ func InitializeWorld():
 			})
 
 
-func _init():
+func Initialize():
+	rows = 9 * map_multiplier
+	cols = 16 * map_multiplier
+	player_count = int(ceil(map_multiplier / 2.0))
+	
+	print("map_multiplier: ", map_multiplier)
+	print("rows: ", cols)
+	print("cols: ", cols)
+	print("player_count: ", player_count)
 	
 	print("Initializing world...")
 	InitializeWorld()
@@ -63,8 +71,11 @@ func _init():
 #	GenerateLargeobj(structures.structure["mountain"])
 
 
-func _ready():
-	$Music.playing = Music
+func Build():
+	
+	print("Music settings NOT applied...")
+#	$Music.playing = Music
+	
 	print("Placing structures and terrain...")
 	for row in range(rows):
 		for col in range(cols):
@@ -75,8 +86,8 @@ func _ready():
 				PlaceObj(structures.structure[map[row][col]["structure"]["name"]], row, col)
 	
 	print("Setting up map camera...")
-	$MapCamera.position = camera_position
-	$MapCamera.make_current()
+#	$MapCamera.position = camera_position
+#	$MapCamera.make_current()
 
 
 func _draw():
@@ -180,10 +191,11 @@ func PlacePlayer(row, col):
 		new_player = preload("res://Scenes/FemalePlayer.tscn").instantiate()
 		new_player.initiate(0)
 	else: 
-		new_player = preload("res://Scenes/MalePlayer.tscn").instantiate()
+		new_player = preload("res://Scenes/Player.tscn").instantiate()
 		new_player.initiate(1)
 	
 	new_player.position = Vector2(grid_size * (float(col + 0.5)), grid_size * (float(row + 0.5)))
 	new_player.map_coordinates = [row, col]
 	add_child(new_player)
 	
+

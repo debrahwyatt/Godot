@@ -18,7 +18,7 @@ var selection_color = Color(0, 0, 1, 0.2)  # Blue with 20% opacity
 
 
 func _ready(): 
-	UI = get_parent().get_child(1)
+	UI = get_parent()
 
 func _draw() -> void: 
 	if selecting: 
@@ -41,19 +41,20 @@ func _input(event):
 	
 #	Start the selection process
 	if Input.is_action_just_pressed("Selecting"):
-		selection_start = get_global_mouse_position()
-		selection_end = get_global_mouse_position()
+		print("Selecting")
+		selection_start = get_local_mouse_position()
+		selection_end = get_local_mouse_position()
 		return
 	
 #	While holding down the select button
 	if Input.is_action_pressed("Selecting"): 
 		selecting = true
-		selection_end = get_global_mouse_position() - selection_start
+		selection_end = get_local_mouse_position() - selection_start
 #		return
 		
 #	Let go of the select button, and select what's in the box
 	if Input.is_action_just_released("Selecting"):
-		if get_global_mouse_position() - selection_start == Vector2(0, 0): SingleClickSelect()
+		if get_local_mouse_position() - selection_start == Vector2(0, 0): SingleClickSelect()
 		else: SelectGroup("Players")
 		selecting = false
 
@@ -74,6 +75,7 @@ func Target():
 
 
 func SingleClickSelect():
+#	print("Single Click")
 	for item in selected_list: item.Selected(false)
 	
 	for x in get_tree().get_nodes_in_group("Selectable"):
@@ -91,7 +93,7 @@ func SingleClickSelect():
 	
 
 func SelectGroup(group):
-	
+	print("Group")
 	var new_selected_list = []
 	for child in selected_list: child.Selected(false)
 	

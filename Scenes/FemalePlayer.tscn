@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://buuf27te003dh"]
+[gd_scene load_steps=19 format=3 uid="uid://buuf27te003dh"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0knyc"]
 [ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_mj4ic"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_vxyk0"]
 [ext_resource type="Texture2D" uid="uid://c6hpbv7dctuph" path="res://Assets/Player/FemaleBody.png" id="6_yt2a7"]
 [ext_resource type="Texture2D" uid="uid://bqqth8satuv27" path="res://Assets/Player/FemaleFoot.png" id="7_4y0ex"]
+[ext_resource type="AudioStream" uid="uid://bluh6us48q3o7" path="res://Sounds/FemaleDeath.wav" id="8_k1o2w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ck0i"]
 size = Vector2(34, 13)
@@ -26,7 +27,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/path = NodePath("Sprite/Foot1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,7 +39,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/path = NodePath("Sprite/Foot2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -50,7 +51,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2/FemaleBody:position")
+tracks/2/path = NodePath("Sprite/Body:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -65,7 +66,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/path = NodePath("Sprite/Foot1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -77,7 +78,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/path = NodePath("Sprite/Foot2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -89,7 +90,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2/FemaleBody:position")
+tracks/2/path = NodePath("Sprite/Body:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -110,7 +111,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/path = NodePath("Sprite/Foot1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -122,7 +123,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/path = NodePath("Sprite/Foot2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -139,7 +140,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2/Foot1:position")
+tracks/0/path = NodePath("Sprite/Foot1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -151,7 +152,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2/Foot2:position")
+tracks/1/path = NodePath("Sprite/Foot2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -178,6 +179,9 @@ texture = ExtResource("2_mj4ic")
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_4ck0i")
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(0, -33.5)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -33.5)
@@ -212,28 +216,28 @@ text = "Name Box"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2" type="Node2D" parent="."]
+[node name="Sprite" type="Node2D" parent="."]
 scale = Vector2(1.1, 1.1)
 
-[node name="OldFemaleBody" type="Sprite2D" parent="Sprite2"]
+[node name="Body" type="Sprite2D" parent="Sprite"]
+position = Vector2(0, -28)
+texture = ExtResource("6_yt2a7")
+
+[node name="OldBody" type="Sprite2D" parent="Sprite"]
 visible = false
 position = Vector2(1.49012e-07, -27.7273)
 scale = Vector2(0.962567, 0.956113)
 texture = ExtResource("3_hlsry")
 
-[node name="FemaleBody" type="Sprite2D" parent="Sprite2"]
-position = Vector2(0, -28)
-texture = ExtResource("6_yt2a7")
-
-[node name="Foot1" type="Sprite2D" parent="Sprite2"]
+[node name="Foot1" type="Sprite2D" parent="Sprite"]
 position = Vector2(8, 0)
 texture = ExtResource("7_4y0ex")
 
-[node name="Foot2" type="Sprite2D" parent="Sprite2"]
+[node name="Foot2" type="Sprite2D" parent="Sprite"]
 position = Vector2(-8, 0)
 texture = ExtResource("7_4y0ex")
 
-[node name="Eyes" type="Sprite2D" parent="Sprite2"]
+[node name="Eyes" type="Sprite2D" parent="Sprite"]
 visible = false
 position = Vector2(1, -44)
 texture = ExtResource("4_dpwxc")
@@ -241,6 +245,10 @@ texture = ExtResource("4_dpwxc")
 [node name="AudioStream2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -33.5)
 stream = ExtResource("6_vxyk0")
+
+[node name="FemaleDeath" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -33.5)
+stream = ExtResource("8_k1o2w")
 
 [node name="IdleAnimation" type="AnimationPlayer" parent="."]
 libraries = {

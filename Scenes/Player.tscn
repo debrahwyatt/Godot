@@ -1,12 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://44m17do0518x"]
+[gd_scene load_steps=21 format=3 uid="uid://44m17do0518x"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q0yir"]
 [ext_resource type="Texture2D" uid="uid://cv7haw2m1d02f" path="res://Assets/Selection/Selection.png" id="2_2dbk4"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="2_87g67"]
 [ext_resource type="Texture2D" uid="uid://dofs5sorxdc72" path="res://Assets/Player/body.png" id="3_7kj1x"]
 [ext_resource type="Texture2D" uid="uid://c5bryj2es73t0" path="res://Assets/Player/eyes.png" id="4_moywf"]
+[ext_resource type="Texture2D" uid="uid://be13i2v5pigj" path="res://Assets/Player/OldMaleBody.png" id="4_nwv1v"]
+[ext_resource type="Texture2D" uid="uid://pbdu6ts17h3a" path="res://Assets/Player/MaleBody.png" id="5_0d1y4"]
 [ext_resource type="Texture2D" uid="uid://bvx6csu4o535u" path="res://Assets/Player/foot.png" id="5_xiyo4"]
 [ext_resource type="AudioStream" uid="uid://bauk3ug50dagp" path="res://Sounds/Chew.wav" id="6_rh2o7"]
+[ext_resource type="AudioStream" uid="uid://b00gxwc5wjhse" path="res://Sounds/MaleDeath.wav" id="10_31na6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lgs1t"]
 radius = 50.0
@@ -26,7 +29,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:position")
+tracks/0/path = NodePath("Sprite/MaleBody2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +68,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Body:position")
+tracks/0/path = NodePath("Sprite/MaleBody2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -222,10 +225,20 @@ metadata/_edit_use_anchors_ = true
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="Body" type="Sprite2D" parent="Sprite"]
+position = Vector2(0, -33)
+texture = ExtResource("5_0d1y4")
+
+[node name="OldBody" type="Sprite2D" parent="Sprite"]
+visible = false
+position = Vector2(0, -35)
+texture = ExtResource("4_nwv1v")
+
+[node name="MaleBody2" type="Sprite2D" parent="Sprite"]
+visible = false
 position = Vector2(0, -33.5)
 texture = ExtResource("3_7kj1x")
 
-[node name="Eyes" type="Sprite2D" parent="Sprite/Body"]
+[node name="Eyes" type="Sprite2D" parent="Sprite/MaleBody2"]
 position = Vector2(1, -16.2079)
 texture = ExtResource("4_moywf")
 
@@ -240,6 +253,10 @@ texture = ExtResource("5_xiyo4")
 [node name="AudioStream2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -33.5)
 stream = ExtResource("6_rh2o7")
+
+[node name="MaleDeath" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -33.5)
+stream = ExtResource("10_31na6")
 
 [node name="IdleAnimation" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6j4vyvu7gnqc"
+path="res://.godot/imported/Angelwing - Tears of Joy-No Vocal.wav-dad3b0fcf0239e7944b7c3e521a9ce5c.sample"
+
+[deps]
+
+source_file="res://Music/Angelwing - Tears of Joy-No Vocal.wav"
+dest_files=["res://.godot/imported/Angelwing - Tears of Joy-No Vocal.wav-dad3b0fcf0239e7944b7c3e521a9ce5c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

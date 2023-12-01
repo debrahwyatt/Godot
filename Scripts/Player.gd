@@ -14,6 +14,7 @@ var map_coordinates
 
 var age = 28 + rnd()
 var age_drain = 0.001
+var age_max = 100 + rnd()
 
 var speed_max = 150.0 + rnd() * 1.5
 var speed_cur = speed_max
@@ -57,7 +58,7 @@ var structure = {
 var player = {
 	"name": "player",
 	"terrain": "grass",
-	"node": preload("res://Scenes/MalePlayer.tscn"),
+	"node": preload("res://Scenes/Player.tscn"),
 	"code": "P",
 }
 
@@ -98,7 +99,14 @@ var female_name_list = [
 var last_name_list = male_name_list + female_name_list
 
 
-func Death(): queue_free()
+func Death(): 
+	if gender == 0: 
+		print("Female Death")
+		$FemaleDeath.play()
+	else:
+		print("Male Death") 
+		$MaleDeath.play()
+	queue_free()
 
 
 func initiate(g):
@@ -108,11 +116,12 @@ func initiate(g):
 
 
 func _physics_process(_delta):
-	age += age_drain + 0.1
-	if age >= 60.0 && gender == 0: 
-		$Sprite2/FemaleBody.visible = false
-		$Sprite2/OldFemaleBody.visible = true
+	age += age_drain
+	if $Sprite/OldBody.visible == false and age >= 60.0: 
+		$Sprite/Body.visible = false
+		$Sprite/OldBody.visible = true
 	
+	if age >= age_max: Death()
 	if health_cur <= 0: Death()
 	if energy_loss == true: Drowning()
 	
@@ -150,7 +159,7 @@ func Eat(value):
 	hunger_cur += value
 	if hunger_cur > hunger_max: hunger_cur = hunger_max
 	
-	happy_cur += value / 3
+	happy_cur += value / 10.0
 	if happy_cur > happy_max: happy_cur = happy_max
 
 
@@ -182,17 +191,19 @@ func Move(_delta):
 	if is_moving:
 		MoveToTarget(_delta)
 		move_and_slide()
+		
 		$IdleAnimation.stop()
 		$WalkAnimation.play("Walk")
 		if energy_cur > 0: energy_cur -= energy_drain
 		if hunger_cur > 0: hunger_cur -= hunger_drain * 2
-		else: health_cur -= health_drain
+		else: health_cur -= hunger_drain * 2
 	else:
-		if energy_cur < energy_max: energy_cur += energy_drain * 3
-		if hunger_cur > 0: hunger_cur -= hunger_drain
-		if happy_cur > 0: happy_cur -= happy_drain
 		$WalkAnimation.stop()
 		$IdleAnimation.play("Idle")
+		if energy_cur < energy_max: energy_cur += energy_drain * 3
+		if happy_cur > 0: happy_cur -= happy_drain
+		if hunger_cur > 0: hunger_cur -= hunger_drain
+		else: health_cur -= hunger_drain
 
 
 func MoveToTarget(delta):
@@ -205,7 +216,7 @@ func MoveToTarget(delta):
 
 func interact(player2):
 	if gender == Gender.FEMALE && player2.gender == Gender.MALE:
-		var Player = preload("res://Scenes/MalePlayer.tscn")
+		var Player = preload("res://Scenes/Player.tscn")
 		var new_player = Player.instantiate()
 		new_player.position = Vector2(self.get_position().x , self.get_position().y)
 		call_deferred("add_sibling", new_player)

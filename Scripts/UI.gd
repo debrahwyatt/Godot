@@ -19,7 +19,7 @@ var selected_list = []
 var top_player
 
 var players = preload("res://Scenes/Player.tscn").instantiate()
-#var Player = preload("res://Scripts/Player.gd").new()
+#var players = preload("res://Scripts/Player.gd").new()
 
 var sex = ["Female", "Male"]
 enum Stats {BAR, VALUE}
@@ -27,7 +27,10 @@ enum Stats {BAR, VALUE}
 func _physics_process(_delta):
 	if top_player && is_instance_valid(top_player):
 		
-		var x = 248
+#		x = the size of the bars
+		var x = 248 
+		print($CanvasLayer/BottomBar/Age/Bar.get_minimum_size())
+		x = $CanvasLayer/BottomBar/Age/Bar.get_minimum_size()
 
 		Health.get_child(Stats.VALUE).text = str(int(top_player.health_cur)) + " / " + str(int(top_player.health_max))
 		Health.get_child(Stats.BAR).size.x =int((top_player.health_cur / top_player.health_max) * x)

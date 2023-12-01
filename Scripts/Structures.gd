@@ -1,7 +1,7 @@
 extends Node
 
 var tree_percent = 0.03
-var bush_percent = 0.0015
+var bush_percent = 0.001
 var mountain_percent = 0.01
 var player_percent = 0.002
 

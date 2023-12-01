@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnvfwhua3fscl"]
+
+[ext_resource type="Script" path="res://Scripts/MapFactory.gd" id="1_b102s"]
+[ext_resource type="FontFile" uid="uid://jykks3bol6g8" path="res://Assets/Fonts/BLKCHCRY.TTF" id="7_gh783"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_adiar"]
+line_spacing = 0.0
+font = ExtResource("7_gh783")
+font_size = 50
+font_color = Color(0.870588, 0.870588, 0.870588, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oldnu"]
+font_size = 24
+
+[node name="MapFactory" type="CanvasLayer"]
+script = ExtResource("1_b102s")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.580392, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.338
+offset_left = -8.0
+offset_bottom = -246.744
+text = "Map Creation"
+label_settings = SubResource("LabelSettings_adiar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="Control"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13
+anchor_top = 0.588
+anchor_right = 0.331
+anchor_bottom = 0.654
+offset_left = -0.560013
+offset_top = 0.255981
+offset_right = -0.87207
+offset_bottom = -7.55206
+text = "Start"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 433.0
+offset_right = -1671.0
+offset_bottom = -581.0
+text = "Map Multiplier"
+label_settings = SubResource("LabelSettings_oldnu")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_left = 547.0
+offset_top = 448.0
+offset_right = 614.063
+offset_bottom = 497.0
+text = "4"
+alignment = 1
+max_length = 2
+virtual_keyboard_type = 2
+
+[node name="HSlider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 453.0
+offset_right = 515.0
+offset_bottom = 496.0
+min_value = 4.0
+max_value = 20.0
+value = 4.0
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="value_changed" from="Control/HSlider" to="." method="_on_h_slider_value_changed"]
